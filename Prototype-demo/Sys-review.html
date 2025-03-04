@@ -1,0 +1,133 @@
+
+<html class="">
+
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="h-full text-base-content">
+<div id="mobile-app" class="bg-gray-50">
+  <nav id="header" class="fixed top-0 w-full bg-white border-b border-gray-100 z-50">
+    <div class="flex items-center justify-between px-4 h-14">
+      <h1 class="text-lg font-semibold">Admin Reviews</h1>
+      <button class="p-2">
+        <i class="fa-solid fa-filter text-gray-600"></i>
+      </button>
+    </div>
+  </nav>
+  <main id="main-content" class="pt-14 pb-16">
+    <section id="stats-section" class="p-4 bg-white border-b border-gray-100">
+      <div class="grid grid-cols-3 gap-4">
+        <div class="text-center">
+          <p class="text-2xl font-semibold text-blue-600">124</p>
+          <p class="text-xs text-gray-500">Total Reviews</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl font-semibold text-yellow-600">4.8</p>
+          <p class="text-xs text-gray-500">Avg Rating</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl font-semibold text-green-600">89%</p>
+          <p class="text-xs text-gray-500">Success Rate</p>
+        </div>
+      </div>
+    </section>
+    <section id="reviews-list" class="px-4 py-4">
+      <div class="space-y-4">
+        <div id="review-1" class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <img class="w-10 h-10 rounded-full" src="CatImg/avatar.jpg" alt="User avatar">
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <a href="Sys-detailedProfile.html" class="font-semibold">Sarah Connor</a>
+                <button class="text-red-600 text-sm font-medium">
+                  remove
+                </button>
+              </div>
+              <div class="flex text-yellow-400 my-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-sm text-gray-600">Found my cat within 24 hours! The community was incredibly helpful.</p>
+              <div class="mt-2 p-2 bg-gray-50 rounded-lg">
+
+                <p class="text-sm">Tabby Cat - Downtown street</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="review-2" class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <img class="w-10 h-10 rounded-full" src="CatImg/avatar.jpg" alt="User avatar">
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">Mike Shinoda</h3>
+                <button class="text-red-600 text-sm font-medium">
+                  remove
+                </button>
+              </div>
+              <div class="flex text-yellow-400 my-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <p class="text-sm text-gray-600">Successfully reunited with my cat thanks to this app. Great experience overall!</p>
+              <div class="mt-2 p-2 bg-gray-50 rounded-lg">
+                <p class="text-sm">Tabby Cat - Downtown Street</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="review-3" class="bg-white p-4 rounded-lg shadow-sm">
+          <div class="flex items-start gap-3">
+            <img class="w-10 h-10 rounded-full" src="CatImg/avatar.jpg" alt="User avatar">
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold">Emma Watson</h3>
+                <button class="text-red-600 text-sm font-medium">
+                  remove
+                </button>
+              </div>
+              <div class="flex text-yellow-400 my-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-sm text-gray-600">Amazing platform! Found my lost dog within hours. The map feature was very helpful.</p>
+              <div class="mt-2 p-2 bg-gray-50 rounded-lg">
+                <p class="text-sm">Beagle - Riverside Park</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
+    <div class="flex justify-around items-center h-16">
+      <a href="sysStat.html" class="text-gray-600">
+        <i class="fa-solid fa-chart-line text-xl"></i>
+      </a>
+      <a href="Sysadmin-dashboard.html" class="text-gray-600">
+        <i class="fa-solid fa-map-location-dot text-xl"></i>
+      </a>
+      <button class="text-blue-600">
+        <i class="fa-solid fa-star text-xl"></i>
+      </button>
+    </div>
+  </nav>
+</div>
+</body>
+</html>
+          
