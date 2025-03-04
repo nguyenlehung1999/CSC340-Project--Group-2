@@ -43,7 +43,8 @@
             <div class="flex-1">
               <div class="flex items-center justify-between">
                 <a href="Sys-detailedProfile.html" class="font-semibold">Sarah Connor</a>
-                <button class="text-red-600 text-sm font-medium">
+                <button class="text-red-600 text-sm font-medium"
+                        onclick="document.getElementById('confirmationDialog').showModal()">
                   remove
                 </button>
               </div>
@@ -128,6 +129,27 @@
     </div>
   </nav>
 </div>
+
+<dialog
+        id="confirmationDialog"
+        class="p-6 bg-white rounded-md shadow-lg">
+  <h2 class="text-lg font-bold mb-4">Confirm Removal</h2>
+  <p class="text-gray-600 mb-6">Are you sure you want to remove this review?</p>
+
+  <div class="flex justify-end space-x-4">
+    <button
+            class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
+            onclick="document.getElementById('confirmationDialog').close()"
+    >
+      Cancel
+    </button>
+    <button
+            class="px-4 py-2 bg-red-600 text-white rounded-md"
+    >
+      Remove
+    </button>
+  </div>
+</dialog>
 </body>
 </html>
           
