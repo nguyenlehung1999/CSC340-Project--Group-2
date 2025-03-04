@@ -1,8 +1,8 @@
-
 <html class="">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap"
+          rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -10,7 +10,8 @@
             autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
         };
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
 
     <style>
         * {
@@ -58,7 +59,7 @@
     </nav>
     <main id="main-content" class="pt-14 pb-16">
         <section id="map-section" class="relative h-[300px]">
-            <img class="w-full h-full object-cover" src="\CatImg\map.png" alt="location for interactive map" >
+            <img class="w-full h-full object-cover" src="\CatImg\map.png" alt="location for interactive map">
             <div class="absolute bottom-4 right-4">
                 <button class="bg-white p-3 rounded-full shadow-lg">
                     <i class="fa-solid fa-location-crosshairs text-blue-600"></i>
@@ -76,9 +77,10 @@
             <div class="space-y-4">
                 <div class="bg-white p-4 rounded-lg shadow-sm">
                     <div class="flex gap-4">
-                        <img class="w-20 h-20 rounded-lg object-cover" src="\CatImg\1.jpg" alt="animal 1" >
+                        <img class="w-20 h-20 rounded-lg object-cover" src="\CatImg\1.jpg" alt="animal 1">
                         <div class="flex-1">
                             <div class="flex items-center justify-between">
+
 
                                 <h3 class="font-semibold">Abyssinian</h3>
                                 <span class="text-red-500 text-sm">Lost</span>
@@ -90,20 +92,25 @@
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-sm">
                     <div class="flex gap-4">
+                        <!-- Image on the left -->
+                        <a>
+                            <img class="w-20 h-20 rounded-lg object-cover" src="\CatImg\2.jpg" alt="animal 2">
+                        </a>
 
+                        <!-- Text Content on the right -->
                         <div class="flex-1">
-                            <div class="flex items-center justify-between">
-
+                            <div class="flex items-center gap-2">
                                 <a href="createReview.html" class="font-semibold">Tabby Cat</a>
                                 <span class="text-green-500 text-sm">Found</span>
                             </div>
                             <p class="text-sm text-gray-500 mt-1">Found: 1 hour ago</p>
                             <p class="text-sm text-gray-500">Downtown Street</p>
-
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </section>
     </main>
     <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
@@ -114,7 +121,7 @@
             <button class="bg-blue-600 p-3 rounded-full -mt-6" onclick="window.location.href='listPet.html';">
                 <i class="fa-solid fa-plus text-white text-xl"></i>
             </button>
-            <button class="text-gray-400">
+            <button class="text-gray-400" onclick="window.location.href='userProfile.html';">
                 <i class="fa-regular fa-user text-xl"></i>
             </button>
 
@@ -123,6 +130,5 @@
 </div>
 </body>
 </html>
-
 
 
