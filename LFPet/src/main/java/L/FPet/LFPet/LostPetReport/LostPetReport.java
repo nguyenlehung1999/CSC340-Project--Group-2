@@ -1,5 +1,8 @@
 package L.FPet.LFPet.LostPetReport;
 
+import L.FPet.LFPet.CommunityMember.CommunityMember;
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
+import L.FPet.LFPet.Pet.Pet;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -12,8 +15,13 @@ public class LostPetReport {
     @Column(name = "lostReportID")
     private Integer lostReportID;
 
-    @Column(name = "petID", nullable = false)
-    private Integer petID;
+    @OneToOne
+    @JoinColumn(name = "petID")
+    private Pet pet;
+
+    @ManyToOne
+    @JoinColumn(name = "ownerID")
+    private LostPetOwner owner;
 
     @Column(name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAT;
@@ -30,10 +38,11 @@ public class LostPetReport {
     public LostPetReport() {
     }
 
-    public LostPetReport(Integer lostReportID, Integer petID, LocalDateTime createdAT,
+    public LostPetReport(Integer lostReportID, LostPetOwner owner, Pet pet, LocalDateTime createdAT,
                          LocalDateTime lastSeen, String lostLocation, boolean status) {
         this.lostReportID = lostReportID;
-        this.petID = petID;
+        this.pet = pet;
+        this.owner = owner;
         this.createdAT = createdAT;
         this.lastSeen = lastSeen;
         this.lostLocation = lostLocation;
@@ -49,14 +58,20 @@ public class LostPetReport {
         this.lostReportID = lostReportID;
     }
 
-    public Integer getPetID() {
-        return petID;
+    public Pet pet() {
+        return pet;
     }
 
-    public void setPetID(Integer petID) {
-        this.petID = petID;
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
+    public LostPetOwner owner() {
+        return owner;
     }
 
+    public void setOwner(LostPetOwner owner) {
+        this.owner = owner;
+    }
     public LocalDateTime getCreatedAT() {
         return createdAT;
     }

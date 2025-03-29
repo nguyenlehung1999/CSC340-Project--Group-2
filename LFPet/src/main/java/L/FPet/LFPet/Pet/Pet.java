@@ -35,7 +35,6 @@ public class Pet {
     @JoinColumn(name = "memberID")
     private CommunityMember member;
 
-    @Column(nullable = false)
     private String imgPath;
 
     private boolean status;
@@ -77,7 +76,7 @@ public class Pet {
 
     ////////////////////////////////////////////////////
     //Getters and Setters
-    public String imgPath() {
+    public String getImgPath() {
         return imgPath;
     }
 
@@ -85,7 +84,7 @@ public class Pet {
         this.imgPath = imgPath;
     }
 
-    public boolean status() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -93,7 +92,7 @@ public class Pet {
         this.status = status;
     }
 
-    public CommunityMember member() {
+    public CommunityMember getMember() {
         return member;
     }
 
@@ -101,7 +100,7 @@ public class Pet {
         this.member = member;
     }
 
-    public double age() {
+    public double getAge() {
         return age;
     }
 
@@ -109,7 +108,7 @@ public class Pet {
         this.age = age;
     }
 
-    public LostPetOwner owner() {
+    public LostPetOwner getOwner() {
         return owner;
     }
 
@@ -117,7 +116,7 @@ public class Pet {
         this.owner = owner;
     }
 
-    public String breed() {
+    public String getBreed() {
         return breed;
     }
 
@@ -125,7 +124,7 @@ public class Pet {
         this.breed = breed;
     }
 
-    public String description() {
+    public String getDescription() {
         return description;
     }
 
@@ -133,7 +132,7 @@ public class Pet {
         this.description = description;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
@@ -141,7 +140,7 @@ public class Pet {
         this.name = name;
     }
 
-    public int petID() {
+    public int getPetID() {
         return petID;
     }
 
@@ -149,7 +148,7 @@ public class Pet {
         this.petID = petID;
     }
 
-    public String species() {
+    public String getSpecies() {
         return species;
     }
 

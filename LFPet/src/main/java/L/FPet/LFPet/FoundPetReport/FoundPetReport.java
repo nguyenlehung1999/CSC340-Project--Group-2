@@ -1,5 +1,7 @@
 package L.FPet.LFPet.FoundPetReport;
 
+import L.FPet.LFPet.CommunityMember.CommunityMember;
+import L.FPet.LFPet.Pet.Pet;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -12,11 +14,13 @@ public class FoundPetReport {
     @Column(name = "foundReportID")
     private Integer foundReportID;
 
-    @Column(name = "memberID")
-    private Integer memberID;
+    @ManyToOne
+    @JoinColumn(name = "memberID")
+    private CommunityMember member;
 
-    @Column(name = "petID")
-    private Integer petID;
+    @OneToOne
+    @JoinColumn(name = "petID")
+    private Pet pet;
 
     @Column(name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAT;
@@ -36,10 +40,10 @@ public class FoundPetReport {
     public FoundPetReport() {
     }
 
-    public FoundPetReport(Integer foundReportID, Integer memberID, Integer petID, LocalDateTime createdAT, String description, LocalDateTime foundDate, String foundLocation, boolean status) {
+    public FoundPetReport(Integer foundReportID, CommunityMember member, Pet pet, LocalDateTime createdAT, String description, LocalDateTime foundDate, String foundLocation, boolean status) {
         this.foundReportID = foundReportID;
-        this.memberID = memberID;
-        this.petID = petID;
+        this.member = member;
+        this.pet = pet;
         this.createdAT = createdAT;
         this.description = description;
         this.foundDate = foundDate;
@@ -56,20 +60,20 @@ public class FoundPetReport {
         this.foundReportID = foundReportID;
     }
 
-    public Integer getMemberID() {
-        return memberID;
+    public CommunityMember member() {
+        return member;
     }
 
-    public void setMemberID(Integer memberID) {
-        this.memberID = memberID;
+    public void setMember(CommunityMember member) {
+        this.member = member;
     }
 
-    public Integer getPetID() {
-        return petID;
+    public Pet pet() {
+        return pet;
     }
 
-    public void setPetID(Integer petID) {
-        this.petID = petID;
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
 
     public LocalDateTime getCreatedAT() {
