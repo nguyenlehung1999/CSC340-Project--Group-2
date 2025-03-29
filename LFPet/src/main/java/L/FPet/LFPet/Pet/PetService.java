@@ -78,8 +78,15 @@ public class PetService {
      * @param pet   the new Pet details.
      */
     public void updatePet(int petId, Pet pet) {
-        // save() performs a merge operation if the entity already exists.
-        petRepository.save(pet);
+        Pet existing = getPetById(petId);
+        existing.setName(pet.getName());
+        existing.setBreed(pet.getBreed());
+        existing.setDescription(pet.getDescription());
+        existing.setAge(pet.getAge());
+        existing.setStatus(pet.getStatus());
+        existing.setImgPath(pet.getImgPath());
+
+        petRepository.save(existing);
     }
 
     /**

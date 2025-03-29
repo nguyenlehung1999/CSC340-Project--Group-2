@@ -23,15 +23,15 @@ public class LostPetOwner {
     @Column(name = "imgPATH", length = 100)
     private String imgPATH;
 
-    @Column(name = "status", length = 20)
-    private String status;
+    @Column(name = "status")
+    private boolean status;
 
     // No-argument constructor (required by JPA)
     public LostPetOwner() {
     }
 
     // All-argument constructor
-    public LostPetOwner(Integer ownerID, String username, String password, String email, String imgPATH, String status) {
+    public LostPetOwner(Integer ownerID, String username, String password, String email, String imgPATH, boolean status) {
         this.ownerID = ownerID;
         this.username = username;
         this.password = password;
@@ -81,11 +81,11 @@ public class LostPetOwner {
         this.imgPATH = imgPATH;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
