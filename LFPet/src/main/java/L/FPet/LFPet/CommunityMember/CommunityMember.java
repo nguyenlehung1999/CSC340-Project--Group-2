@@ -94,7 +94,7 @@ public class CommunityMember {
         this.joinDate = joinDate;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
