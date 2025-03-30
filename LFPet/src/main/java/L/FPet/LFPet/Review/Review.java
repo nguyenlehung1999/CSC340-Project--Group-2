@@ -1,6 +1,7 @@
 package L.FPet.LFPet.Review;
 
 import L.FPet.LFPet.FoundPetReport.FoundPetReport;
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -17,6 +18,10 @@ public class Review {
     @JoinColumn(name = "foundReportID")
     private FoundPetReport foundReport;
 
+    @ManyToOne
+    @JoinColumn(name = "ownerID")
+    private LostPetOwner owner;
+
     @Column(name = "rating", nullable = false)
     private Integer rating;
 
@@ -29,9 +34,10 @@ public class Review {
     public Review() {
     }
 
-    public Review(Integer reviewID, FoundPetReport foundReport, Integer rating, String reviewText, LocalDateTime timeStamp) {
+    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Integer rating, String reviewText, LocalDateTime timeStamp) {
         this.reviewID = reviewID;
         this.foundReport = foundReport;
+        this.owner = owner;
         this.rating = rating;
         this.reviewText = reviewText;
         this.timeStamp = timeStamp;
@@ -56,6 +62,14 @@ public class Review {
 
     public Integer getRating() {
         return rating;
+    }
+
+    public LostPetOwner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(LostPetOwner owner) {
+        this.owner = owner;
     }
 
     public void setRating(Integer rating) {

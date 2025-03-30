@@ -10,9 +10,5 @@ import java.util.List;
 @Repository
 public interface AdminRepository extends JpaRepository<SystemAdmin, Integer> {
 
-    /**
-     * GET all reviews.
-     */
-//    @Query("SELECT * FROM Review r")
-//    List<Review> findAllReviews();
+
 }

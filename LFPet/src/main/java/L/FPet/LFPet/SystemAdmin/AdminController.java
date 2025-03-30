@@ -4,11 +4,15 @@ import L.FPet.LFPet.CommunityMember.CommunityMember;
 import L.FPet.LFPet.CommunityMember.MemberService;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import L.FPet.LFPet.LostPetOwner.OwnerService;
+import L.FPet.LFPet.Review.Review;
+import L.FPet.LFPet.Review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -22,6 +26,9 @@ public class AdminController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     /**
      * Get a list of all User in the database.
@@ -66,5 +73,29 @@ public class AdminController {
         CommunityMember updatedMember = memberService.getMemberById(memberId);
 
         return new ResponseEntity<>(updatedMember, HttpStatus.OK);
+    }
+    /**
+     * Get a list of all Reviews.
+     * URL: http://localhost:8080/admin/reviews/all
+     *
+     * @return a list of Review objects.
+     */
+    @GetMapping("/reviews/all")
+    public ResponseEntity<List<Review>> getAllReviews() {
+        List<Review> reviews = reviewService.getAllReviews();
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+    /**
+     * Delete a Review object.
+     * URL: http://localhost:8080/admin/reviews/delete/{reviewId}
+     *
+     * @param reviewId the unique Review id.
+     * @return the updated list of Review objects, or an error message if not found.
+     */
+    @DeleteMapping("/reviews/delete/{reviewId}")
+    public ResponseEntity<?> deleteReview(@PathVariable int reviewId) {
+        Review review = reviewService.getReviewById(reviewId);
+        reviewService.deleteReviewById(reviewId);
+        return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
     }
 }
