@@ -2,8 +2,10 @@ package L.FPet.LFPet.SystemAdmin;
 
 import L.FPet.LFPet.CommunityMember.CommunityMember;
 import L.FPet.LFPet.CommunityMember.MemberService;
+import L.FPet.LFPet.FoundPetReport.FReportService;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import L.FPet.LFPet.LostPetOwner.OwnerService;
+import L.FPet.LFPet.Pet.PetService;
 import L.FPet.LFPet.Review.Review;
 import L.FPet.LFPet.Review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import java.util.Map;
 public class AdminController {
 
     @Autowired
+    private PetService petService;
+
+    @Autowired
     private AdminService service;
 
     @Autowired
@@ -32,9 +37,12 @@ public class AdminController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private FReportService fReportService;
+
     /**
      * Get a list of all User in the database.
-     * URL: http://localhost:8080/admin/allUser
+     * URL: http://localhost:8080/admin/allusers
      *
      * @return a list of owners and members objects.
      */
@@ -44,11 +52,11 @@ public class AdminController {
     }
     /**
             * Update the status of an owner by their ID.
-            * URL: http://localhost:8080/admin//updateowner/{ownerId}
+            * URL: http://localhost:8080/admin/updateowner/{ownerId}
             *
             * Example request body:
             * {
-            *    "status": "true"
+            *    "status": true
             * }
      */
     @PutMapping("/updateowner/{ownerId}")
@@ -67,13 +75,10 @@ public class AdminController {
      */
     @PutMapping("/updatemember/{memberId}")
     public ResponseEntity<CommunityMember> updateMemberStatus(@PathVariable int memberId, @RequestBody CommunityMember member) {
-
-        // Call the service to update the member
+        //Call the service to update the member
         service.updateMember(memberId, member);
-
-        // Retrieve the updated member from the database
+        //Retrieve the updated member from the database
         CommunityMember updatedMember = memberService.getMemberById(memberId);
-
         return new ResponseEntity<>(updatedMember, HttpStatus.OK);
     }
     /**
@@ -107,12 +112,16 @@ public class AdminController {
     @GetMapping("/statistics")
     public ResponseEntity<Map<String, Object>> getStats() {
         Map<String, Object> stats = new HashMap<>();
+        stats.put("totalPets", petService.countPets());
+        stats.put("totalFoundPets", (petService.getPetsByStatus(true)).size());
+        stats.put("totalLostPets", (petService.getPetsByStatus(false)).size());
+        stats.put("successfulReunions", (fReportService.getFReportsByStatus(true)).size());
         stats.put("totalReviews", reviewService.getReviewCount());
         stats.put("averageRating", reviewService.getAverageRating());
-        stats.put("activeOwners", ownerService.getOwnersByStatus(true));
-        stats.put("bannedOwners", ownerService.getOwnersByStatus(false));
-        stats.put("activeMembers", memberService.getMembersByStatus(true));
-        stats.put("bannedMembers", memberService.getMembersByStatus(false));
+        stats.put("activeOwners", (ownerService.getOwnersByStatus(true)).size());
+        stats.put("bannedOwners", (ownerService.getOwnersByStatus(false)).size());
+        stats.put("activeMembers", (memberService.getMembersByStatus(true)).size());
+        stats.put("bannedMembers", (memberService.getMembersByStatus(false)).size());
         stats.put("totalUsers", memberService.countMembers() + ownerService.countOwners());
 
         return new ResponseEntity<>(stats, HttpStatus.OK);

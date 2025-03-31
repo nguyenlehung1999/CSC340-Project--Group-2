@@ -81,6 +81,7 @@ public class OwnerService {
         existing.setUsername(owner.getUsername());
         existing.setPassword(owner.getPassword());
         existing.setEmail(owner.getEmail());
+        existing.setStatus(owner.getStatus());
         existing.setImgPATH(owner.getImgPATH());
 
         ownerRepository.save(existing);

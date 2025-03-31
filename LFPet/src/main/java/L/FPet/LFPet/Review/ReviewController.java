@@ -45,7 +45,6 @@ public class ReviewController {
      * URL: http://localhost:8080/reviews/new
      * Example request body (JSON):
      * {
-     *   {
      *   "rating": 4,
      *   "reviewText": "Great service!",
      *   "foundReport": {
@@ -55,8 +54,6 @@ public class ReviewController {
      *     "ownerID": 2
      *   }
      * }
-     * }
-     *
      * @param review the new Review object to add.
      * @return the updated list of Review objects, or the created Review object.
      */

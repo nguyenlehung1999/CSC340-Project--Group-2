@@ -19,7 +19,6 @@ public class Pet {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
     private String breed;
 
     @Column(nullable = false)
@@ -27,11 +26,11 @@ public class Pet {
 
     private double age;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ownerID")
     private LostPetOwner owner;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "memberID")
     private CommunityMember member;
 

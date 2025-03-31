@@ -1,5 +1,6 @@
 package L.FPet.LFPet.FoundPetReport;
 
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,15 @@ public class FReportService {
         return fReportRepository.findAll();
     }
 
+    /**
+     * Fetch reports by status.
+     *
+     * @param status the status to search for.
+     * @return a list of matching FoundPetReport objects.
+     */
+    public List<FoundPetReport> getFReportsByStatus(boolean status) {
+        return fReportRepository.findByStatus(status);
+    }
     /**
      * Fetch a specific FoundPetReport by its ID.
      *
@@ -53,6 +63,17 @@ public class FReportService {
             existing.setFoundLocation(updatedReport.getFoundLocation());
             existing.setFoundDate(updatedReport.getFoundDate());
             existing.setStatus(updatedReport.getStatus());
+            fReportRepository.save(existing);
+        }
+    }
+    /**
+     * Allow app to update status of a found report by ID
+     *
+     */
+    public void updateStatus(int reportID, FoundPetReport report) {
+        FoundPetReport existing = fReportRepository.findById(reportID).orElse(null);
+        if (existing != null) {
+            existing.setStatus(report.getStatus());
             fReportRepository.save(existing);
         }
     }

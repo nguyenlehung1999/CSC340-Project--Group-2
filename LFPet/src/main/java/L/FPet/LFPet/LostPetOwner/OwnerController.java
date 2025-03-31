@@ -93,12 +93,11 @@ public class OwnerController {
      * URL: http://localhost:8080/owners/update/2
      * Example request body:
      * {
-     *   "ownerID": 2,
      *   "username": "john_doe_updated",
      *   "password": "newsecret",
      *   "email": "john_updated@example.com",
      *   "imgPATH": "newprofile.jpg",
-     *   "status": "active"
+     *   "status": true
      * }
      *
      * @param ownerId the unique Owner id.
