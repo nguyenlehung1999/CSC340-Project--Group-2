@@ -60,7 +60,7 @@ public class FoundPetReport {
         this.foundReportID = foundReportID;
     }
 
-    public CommunityMember member() {
+    public CommunityMember getMember() {
         return member;
     }
 
@@ -68,7 +68,7 @@ public class FoundPetReport {
         this.member = member;
     }
 
-    public Pet pet() {
+    public Pet getPet() {
         return pet;
     }
 
@@ -108,7 +108,7 @@ public class FoundPetReport {
         this.foundLocation = foundLocation;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

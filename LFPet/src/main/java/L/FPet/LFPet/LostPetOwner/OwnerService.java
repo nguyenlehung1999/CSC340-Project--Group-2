@@ -87,6 +87,15 @@ public class OwnerService {
     }
 
     /**
+     * Count the total number of LostPetOwner records.
+     *
+     * @return the total count of owners.
+     */
+    public long countOwners() {
+        return ownerRepository.count();
+    }
+
+    /**
      * Delete an owner by their ID.
      *
      * @param ownerId the unique ID of the owner.

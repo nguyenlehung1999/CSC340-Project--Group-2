@@ -20,4 +20,5 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
 
     @Query(value = "SELECT * FROM pet p WHERE p.name LIKE %?1%", nativeQuery = true)
     List<Pet> getPetsByName(String partialName);
+
 }

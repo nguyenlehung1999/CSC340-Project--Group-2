@@ -3,6 +3,7 @@ package L.FPet.LFPet.Review;
 import L.FPet.LFPet.FoundPetReport.FoundPetReport;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,5 +34,10 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     /**
      * Find review associated with am owner.
      */
-    List<Review> findByOwnerId(LostPetOwner owner);
+    List<Review> findByOwnerOwnerID(LostPetOwner owner);
+    /**
+     * Return the average rating
+     */
+    @Query("SELECT AVG(r.rating) FROM Review r")
+    double findAverageRating();
 }

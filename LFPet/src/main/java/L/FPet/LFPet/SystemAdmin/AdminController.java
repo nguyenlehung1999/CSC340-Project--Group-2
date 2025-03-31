@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -97,5 +99,22 @@ public class AdminController {
         Review review = reviewService.getReviewById(reviewId);
         reviewService.deleteReviewById(reviewId);
         return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
+    }
+    /**
+     * Display system statistics
+     * URL: http://localhost:8080/admin/statistics
+     */
+    @GetMapping("/statistics")
+    public ResponseEntity<Map<String, Object>> getStats() {
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalReviews", reviewService.getReviewCount());
+        stats.put("averageRating", reviewService.getAverageRating());
+        stats.put("activeOwners", ownerService.getOwnersByStatus(true));
+        stats.put("bannedOwners", ownerService.getOwnersByStatus(false));
+        stats.put("activeMembers", memberService.getMembersByStatus(true));
+        stats.put("bannedMembers", memberService.getMembersByStatus(false));
+        stats.put("totalUsers", memberService.countMembers() + ownerService.countOwners());
+
+        return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 }

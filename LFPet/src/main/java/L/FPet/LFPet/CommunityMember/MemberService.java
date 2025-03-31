@@ -75,6 +75,7 @@ public class MemberService {
      * @param memberId the unique ID of the member to update.
      * @param member   the updated CommunityMember object.
      */
+
     public void updateMember(int memberId, CommunityMember member) {
         CommunityMember existing = getMemberById(memberId);
 
@@ -84,6 +85,15 @@ public class MemberService {
             existing.setImgPATH(member.getImgPATH());
             existing.setStatus(member.getStatus());
             memberRepository.save(existing);
+    }
+
+    /**
+     * Count the total number of CommunityMember records.
+     *
+     * @return the total count of community members.
+     */
+    public long countMembers() {
+        return memberRepository.count();
     }
 
     /**

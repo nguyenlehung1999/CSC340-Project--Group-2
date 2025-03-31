@@ -21,6 +21,14 @@ public class ReviewService {
     }
 
     /**
+     * Get total number of reviews
+     *
+     * @return the total number of review
+     */
+    public long getReviewCount() {
+        return reviewRepository.count();
+    }
+    /**
      * Fetch a specific Review by its ID.
      *
      * @param reviewId the unique review ID.
@@ -30,6 +38,12 @@ public class ReviewService {
         return reviewRepository.findById(reviewId).orElse(null);
     }
 
+    /**
+     * Get the average rating of all review
+     */
+    public double getAverageRating() {
+        return reviewRepository.findAverageRating();
+    }
     /**
      * Add a new Review.
      *

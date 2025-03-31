@@ -58,14 +58,15 @@ public class LostPetReport {
         this.lostReportID = lostReportID;
     }
 
-    public Pet pet() {
+    public Pet getPet() {
         return pet;
     }
 
     public void setPet(Pet pet) {
         this.pet = pet;
     }
-    public LostPetOwner owner() {
+
+    public LostPetOwner getOwner() {
         return owner;
     }
 
@@ -96,7 +97,7 @@ public class LostPetReport {
         this.lostLocation = lostLocation;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
