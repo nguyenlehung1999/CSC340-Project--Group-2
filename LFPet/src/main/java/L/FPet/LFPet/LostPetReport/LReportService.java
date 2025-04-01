@@ -25,7 +25,7 @@ public class LReportService {
      * Fetch a specific LostPetReport by its ID.
      *
      * @param reportId the unique report ID.
-     * @return a LostPetReport object, or null if not found.
+     * @return a LostPetReport object.
      */
     public LostPetReport getReportById(int reportId) {
         return lReportRepository.findById(reportId).orElse(null);

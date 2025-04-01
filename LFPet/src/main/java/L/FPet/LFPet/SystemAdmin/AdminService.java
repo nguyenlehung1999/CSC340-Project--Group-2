@@ -19,6 +19,8 @@ public class AdminService {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private AdminRepository repository;
     /**
      * Find all users by combining owners and community members.
      *
@@ -30,6 +32,7 @@ public class AdminService {
         allUsers.addAll(memberRepository.findAll());       // List<CommunityMember>
         return allUsers;
     }
+
 
     /**
      * Allow admin to update status of an owner by ID

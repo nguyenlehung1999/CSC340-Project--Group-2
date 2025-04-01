@@ -15,7 +15,7 @@ public class LostPetReport {
     @Column(name = "lostReportID")
     private Integer lostReportID;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "petID")
     private Pet pet;
 
@@ -23,7 +23,7 @@ public class LostPetReport {
     @JoinColumn(name = "ownerID")
     private LostPetOwner owner;
 
-    @Column(name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false, name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAT;
 
     @Column(name = "lastSeen")

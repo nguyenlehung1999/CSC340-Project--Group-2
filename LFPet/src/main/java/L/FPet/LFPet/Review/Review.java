@@ -23,7 +23,7 @@ public class Review {
     private LostPetOwner owner;
 
     @Column(name = "rating", nullable = false)
-    private Integer rating;
+    private Double rating;
 
     @Column(name = "reviewText", columnDefinition = "TEXT")
     private String reviewText;
@@ -34,7 +34,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Integer rating, String reviewText, LocalDateTime timeStamp) {
+    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Double rating, String reviewText, LocalDateTime timeStamp) {
         this.reviewID = reviewID;
         this.foundReport = foundReport;
         this.owner = owner;
@@ -60,7 +60,7 @@ public class Review {
         this.foundReport = foundReport;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
@@ -72,7 +72,7 @@ public class Review {
         this.owner = owner;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

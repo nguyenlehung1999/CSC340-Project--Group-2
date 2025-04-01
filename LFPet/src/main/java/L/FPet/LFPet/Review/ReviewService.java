@@ -17,7 +17,7 @@ public class ReviewService {
      * @return a list of Review objects.
      */
     public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+        return reviewRepository.findAllSortedByTimeStampNative();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ReviewService {
      * Fetch a specific Review by its ID.
      *
      * @param reviewId the unique review ID.
-     * @return a Review object, or null if not found.
+     * @return a Review object.
      */
     public Review getReviewById(int reviewId) {
         return reviewRepository.findById(reviewId).orElse(null);

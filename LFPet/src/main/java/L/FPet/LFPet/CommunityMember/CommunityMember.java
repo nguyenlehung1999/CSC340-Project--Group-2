@@ -25,7 +25,7 @@ public class CommunityMember {
     private String imgPATH;
 
     // Using java LocalDateTime
-    @Column(name = "joinDate", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false, name = "joinDate", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime joinDate;
 
     @Column(name = "status")

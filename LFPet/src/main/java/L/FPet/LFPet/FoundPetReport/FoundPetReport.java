@@ -18,11 +18,11 @@ public class FoundPetReport {
     @JoinColumn(name = "memberID")
     private CommunityMember member;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "petID")
     private Pet pet;
 
-    @Column(name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false,name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAT;
 
     @Column(name = "description", length = 200)

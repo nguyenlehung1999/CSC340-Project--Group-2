@@ -89,7 +89,7 @@ public class FReportController {
      *
      * @param reportId the unique report ID.
      * @param updatedReport the updated FoundPetReport details.
-     * @return the updated FoundPetReport object or 404 if not found.
+     * @return the updated FoundPetReport object.
      */
     @PutMapping("/updatestatus/{reportId}")
     public ResponseEntity<?> updateStatus(@PathVariable int reportId, @RequestBody FoundPetReport updatedReport) {
@@ -102,7 +102,7 @@ public class FReportController {
      * URL: http://localhost:8080/freports/delete/2
      *
      * @param reportId the unique report ID.
-     * @return the updated list of FoundPetReport objects or 404 if not found.
+     * @return the updated list of FoundPetReport objects.
      */
     @DeleteMapping("/delete/{reportId}")
     public ResponseEntity<?> deleteReportById(@PathVariable int reportId) {

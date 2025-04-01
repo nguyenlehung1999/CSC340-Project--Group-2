@@ -40,4 +40,10 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
      */
     @Query("SELECT AVG(r.rating) FROM Review r")
     double findAverageRating();
+
+    /**
+     * Return all review sorted by time_stamp
+     */
+    @Query(value = "SELECT * FROM review ORDER BY time_stamp DESC", nativeQuery = true)
+    List<Review> findAllSortedByTimeStampNative();
 }

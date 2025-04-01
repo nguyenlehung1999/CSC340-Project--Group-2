@@ -34,7 +34,7 @@ public class FReportService {
      * Fetch a specific FoundPetReport by its ID.
      *
      * @param reportId the unique report ID.
-     * @return a FoundPetReport object, or null if not found.
+     * @return a FoundPetReport object.
      */
     public FoundPetReport getReportById(int reportId) {
         return fReportRepository.findById(reportId).orElse(null);

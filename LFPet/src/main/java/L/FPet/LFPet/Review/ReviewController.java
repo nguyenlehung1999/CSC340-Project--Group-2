@@ -74,7 +74,7 @@ public class ReviewController {
      *
      * @param reviewId the unique review ID.
      * @param updatedReview the updated Review details.
-     * @return the updated Review object, or null if not found.
+     * @return the updated Review object.
      */
     @PutMapping("/update/{reviewId}")
     public ResponseEntity<?> updateReview(@PathVariable int reviewId, @RequestBody Review updatedReview) {

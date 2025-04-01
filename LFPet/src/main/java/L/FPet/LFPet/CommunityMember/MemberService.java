@@ -24,7 +24,7 @@ public class MemberService {
      * Fetch a specific CommunityMember by their ID.
      *
      * @param memberId the unique ID of the member.
-     * @return a CommunityMember object, or null if not found.
+     * @return a CommunityMember object.
      */
     public CommunityMember getMemberById(int memberId) {
         return memberRepository.findById(memberId).orElse(null);
@@ -44,7 +44,7 @@ public class MemberService {
      * Fetch a member by their email.
      *
      * @param email the email address.
-     * @return the CommunityMember object, or null if not found.
+     * @return the CommunityMember object.
      */
     public CommunityMember getMemberByEmail(String email) {
         return memberRepository.getMembersByEmail(email);

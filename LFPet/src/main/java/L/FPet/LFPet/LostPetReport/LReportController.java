@@ -71,7 +71,7 @@ public class LReportController {
      *
      * @param reportId the unique report ID.
      * @param updatedReport the updated LostPetReport details.
-     * @return the updated LostPetReport object or 404 if not found.
+     * @return the updated LostPetReport object.
      */
     @PutMapping("/update/{reportId}")
     public ResponseEntity<?> updateReport(@PathVariable int reportId, @RequestBody LostPetReport updatedReport) {
@@ -85,7 +85,7 @@ public class LReportController {
      * URL: http://localhost:8080/lreports/delete/2
      *
      * @param reportId the unique report ID.
-     * @return the updated list of LostPetReport objects or 404 if not found.
+     * @return the updated list of LostPetReport objects.
      */
     @DeleteMapping("/delete/{reportId}")
     public ResponseEntity<?> deleteReportById(@PathVariable int reportId) {

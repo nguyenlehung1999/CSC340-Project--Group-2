@@ -2,6 +2,8 @@ package L.FPet.LFPet.LostPetOwner;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "lostpetowner")
 public class LostPetOwner {
@@ -20,6 +22,10 @@ public class LostPetOwner {
     @Column(name = "email", length = 100, nullable = false)
     private String email;
 
+    // Using java LocalDateTime
+    @Column(insertable = false, name = "joinDate", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime joinDate;
+
     @Column(name = "imgPATH", length = 100)
     private String imgPATH;
 
@@ -31,11 +37,12 @@ public class LostPetOwner {
     }
 
     // All-argument constructor
-    public LostPetOwner(Integer ownerID, String username, String password, String email, String imgPATH, boolean status) {
+    public LostPetOwner(Integer ownerID, String username, String password, String email, LocalDateTime joinDate, String imgPATH, boolean status) {
         this.ownerID = ownerID;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.joinDate = joinDate;
         this.imgPATH = imgPATH;
         this.status = status;
     }
@@ -72,6 +79,10 @@ public class LostPetOwner {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public LocalDateTime getJoinDate() {return joinDate;}
+
+    public void setJoinDate(LocalDateTime joinDate) {this.joinDate = joinDate;}
 
     public String getImgPATH() {
         return imgPATH;
