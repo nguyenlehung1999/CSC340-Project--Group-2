@@ -3,13 +3,14 @@ package L.FPet.LFPet.CommunityMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * MemberController.java.
  * Includes all REST API endpoint mappings for the CommunityMember object.
  */
-@RestController
+@Controller
 @RequestMapping("/members")
 public class MemberController {
 

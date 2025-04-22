@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * OwnerController.java.
  * Includes all REST API endpoint mappings for the LostPetOwner object.
  */
-@RestController
+@Controller
 @RequestMapping("/owners")
 public class OwnerController {
 

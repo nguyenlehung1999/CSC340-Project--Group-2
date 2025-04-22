@@ -2,10 +2,12 @@ package L.FPet.LFPet.SystemAdmin;
 
 import L.FPet.LFPet.CommunityMember.CommunityMember;
 import L.FPet.LFPet.CommunityMember.MemberService;
+import L.FPet.LFPet.FoundPetReport.FReportRepository;
 import L.FPet.LFPet.FoundPetReport.FReportService;
 import L.FPet.LFPet.FoundPetReport.FoundPetReport;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import L.FPet.LFPet.LostPetOwner.OwnerService;
+import L.FPet.LFPet.LostPetReport.LReportRepository;
 import L.FPet.LFPet.LostPetReport.LReportService;
 import L.FPet.LFPet.LostPetReport.LostPetReport;
 import L.FPet.LFPet.Pet.PetService;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,7 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -50,6 +54,8 @@ public class AdminController {
     @Autowired
     private LReportService lReportService;
 
+    @Autowired
+    private FReportRepository rRepository;
     /**
      * Get a list of all User in the database.
      * URL: http://localhost:8080/admin/allusers
@@ -61,6 +67,12 @@ public class AdminController {
         return new ResponseEntity<>(service.findAllUser(), HttpStatus.OK);
     }
 
+    @GetMapping("/dashboard")
+    public Object getAllReports(Model model) {
+        model.addAttribute("petReports", rRepository.allReports());
+        model.addAttribute("title", "All Reports");
+        return "Sysadmin-dashboard";
+    }
     /**
      * Get a list of all User in the database.
      * URL: http://localhost:8080/admin/recentmember

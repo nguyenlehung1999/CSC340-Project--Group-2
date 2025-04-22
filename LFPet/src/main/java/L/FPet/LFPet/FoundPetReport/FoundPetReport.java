@@ -1,6 +1,7 @@
 package L.FPet.LFPet.FoundPetReport;
 
 import L.FPet.LFPet.CommunityMember.CommunityMember;
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import L.FPet.LFPet.Pet.Pet;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +18,10 @@ public class FoundPetReport {
     @ManyToOne
     @JoinColumn(name = "memberID")
     private CommunityMember member;
+
+    @ManyToOne
+    @JoinColumn(name = "ownerID")
+    private LostPetOwner owner;
 
     @ManyToOne
     @JoinColumn(name = "petID")
@@ -37,18 +42,23 @@ public class FoundPetReport {
     @Column(name = "status")
     private boolean status;
 
+    @Column(name = "type")
+    private Boolean type;
+
     public FoundPetReport() {
     }
 
-    public FoundPetReport(Integer foundReportID, CommunityMember member, Pet pet, LocalDateTime createdAT, String description, LocalDateTime foundDate, String foundLocation, boolean status) {
+    public FoundPetReport(Integer foundReportID, CommunityMember member, LostPetOwner owner, Pet pet, LocalDateTime createdAT, String description, LocalDateTime foundDate, String foundLocation, boolean status, Boolean type) {
         this.foundReportID = foundReportID;
         this.member = member;
+        this.owner = owner;
         this.pet = pet;
         this.createdAT = createdAT;
         this.description = description;
         this.foundDate = foundDate;
         this.foundLocation = foundLocation;
         this.status = status;
+        this.type = type;
     }
 
     // Getters and Setters
@@ -66,6 +76,14 @@ public class FoundPetReport {
 
     public void setMember(CommunityMember member) {
         this.member = member;
+    }
+
+    public LostPetOwner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(LostPetOwner owner) {
+        this.owner = owner;
     }
 
     public Pet getPet() {
@@ -115,4 +133,8 @@ public class FoundPetReport {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public boolean getType() {return type;}
+
+    public void setType(Boolean type) {this.type = type;}
 }

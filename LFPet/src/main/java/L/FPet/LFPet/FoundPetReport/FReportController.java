@@ -3,13 +3,15 @@ package L.FPet.LFPet.FoundPetReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * FReportController.java
  * Includes all REST API endpoint mappings for the FoundPetReport entity.
  */
-@RestController
+@Controller
 @RequestMapping("/freports")
 public class FReportController {
 
@@ -35,9 +37,10 @@ public class FReportController {
      * @return one FoundPetReport object or 404 if not found.
      */
     @GetMapping("/{reportId}")
-    public ResponseEntity<?> getOneReport(@PathVariable int reportId) {
-        FoundPetReport report = fReportService.getReportById(reportId);
-        return new ResponseEntity<>(report, HttpStatus.OK);
+    public Object getOneReport(@PathVariable int reportId, Model model) {
+        model.addAttribute("report", fReportService.getReportById(reportId));
+        model.addAttribute("title", "Report #: " + reportId);
+        return "Sys-detailedFoundPost";
     }
 
     /**

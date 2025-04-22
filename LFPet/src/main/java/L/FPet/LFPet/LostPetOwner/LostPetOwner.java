@@ -16,6 +16,9 @@ public class LostPetOwner {
     @Column(name = "username", length = 50, nullable = false)
     private String username;
 
+    @Column(name = "fullname", length = 50, nullable = false)
+    private String fullname;
+
     @Column(name = "password", length = 50, nullable = false)
     private String password;
 
@@ -37,9 +40,10 @@ public class LostPetOwner {
     }
 
     // All-argument constructor
-    public LostPetOwner(Integer ownerID, String username, String password, String email, LocalDateTime joinDate, String imgPATH, boolean status) {
+    public LostPetOwner(Integer ownerID, String username, String fullname, String password, String email, LocalDateTime joinDate, String imgPATH, boolean status) {
         this.ownerID = ownerID;
         this.username = username;
+        this.fullname = fullname;
         this.password = password;
         this.email = email;
         this.joinDate = joinDate;
@@ -64,6 +68,9 @@ public class LostPetOwner {
         this.username = username;
     }
 
+    public String getFullname() {return fullname;}
+
+    public void setFullname(String fullname) {this.fullname = fullname;}
     public String getPassword() {
         return password;
     }
