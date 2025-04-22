@@ -19,6 +19,10 @@ public interface FReportRepository extends JpaRepository<FoundPetReport, Integer
      */
     List<FoundPetReport> findByMemberMemberID(Integer memberID);
 
+    long countByOwnerOwnerID(Integer ownerID);
+
+    long countByMemberMemberID(Integer memberID);
+
     @Query(value = "SELECT * FROM foundpetreport ORDER BY createdat DESC;", nativeQuery = true)
     List<FoundPetReport> allReports();
 }

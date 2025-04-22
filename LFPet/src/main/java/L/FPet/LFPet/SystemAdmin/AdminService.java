@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -33,7 +34,34 @@ public class AdminService {
         return allUsers;
     }
 
+    public List<UserDTO> findAllUsersAsDTOs() {
+        List<UserDTO> userDTOs = new ArrayList<>();
 
+        for (LostPetOwner owner : ownerRepository.findAll()) {
+            UserDTO dto = new UserDTO();
+            dto.setId(owner.getOwnerID());
+            dto.setUsername(owner.getUsername());
+            dto.setEmail(owner.getEmail());
+            dto.setJoindate(owner.getJoinDate());
+            dto.setStatus(owner.getStatus());
+            dto.setRole("owner");
+            userDTOs.add(dto);
+        }
+
+        for (CommunityMember member : memberRepository.findAll()) {
+            UserDTO dto = new UserDTO();
+            dto.setId(member.getMemberID());
+            dto.setUsername(member.getUsername());
+            dto.setEmail(member.getEmail());
+            dto.setJoindate(member.getJoinDate());
+            dto.setStatus(member.getStatus());
+            dto.setRole("member");
+            userDTOs.add(dto);
+        }
+
+        userDTOs.sort(Comparator.comparing(UserDTO::getJoindate).reversed());
+        return userDTOs;
+    }
     /**
      * Allow admin to update status of an owner by ID
      *

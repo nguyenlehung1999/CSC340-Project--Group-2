@@ -87,6 +87,9 @@ public class OwnerService {
         ownerRepository.save(existing);
     }
 
+    public void save(LostPetOwner owner) {
+        ownerRepository.save(owner);
+    }
     /**
      * Count the total number of LostPetOwner records.
      *

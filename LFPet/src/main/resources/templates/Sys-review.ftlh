@@ -5,19 +5,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body class="h-full text-base-content">
 <div id="mobile-app" class="bg-gray-50">
   <nav id="header" class="fixed top-0 w-full bg-white border-b border-gray-100 z-50">
     <div class="flex items-center justify-between px-4 h-14">
-      <h1 class="text-lg font-semibold">Admin Reviews</h1>
-      <button class="p-2">
-        <i class="fa-solid fa-filter text-gray-600"></i>
-      </button>
+      <h1 class="text-lg font-semibold">L&F Pet - Reviews</h1>
     </div>
   </nav>
+
   <main id="main-content" class="pt-14 pb-16">
     <section id="stats-section" class="p-4 bg-white border-b border-gray-100">
       <div class="grid grid-cols-3 gap-4">
@@ -35,83 +33,43 @@
         </div>
       </div>
     </section>
-    <section id="reviews-list" class="px-4 py-4">
-      <div class="space-y-4">
-        <div id="review-1" class="bg-white p-4 rounded-lg shadow-sm">
-          <div class="flex items-start gap-3">
-            <img class="w-10 h-10 rounded-full" src="CatImg/avatar.jpg" alt="User avatar">
-            <div class="flex-1">
-              <div class="flex items-center justify-between">
-                <a href="Sys-detailedProfile.ftlh" class="font-semibold">Sarah Connor</a>
-                <button class="text-red-600 text-sm font-medium"
-                        onclick="document.getElementById('confirmationDialog').showModal()">
-                  remove
-                </button>
-              </div>
-              <div class="flex text-yellow-400 my-1">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="text-sm text-gray-600">Found my cat within 24 hours! The community was incredibly helpful.</p>
-              <div class="mt-2 p-2 bg-gray-50 rounded-lg">
 
-                <p class="text-sm">Tabby Cat - Downtown street</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="review-2" class="bg-white p-4 rounded-lg shadow-sm">
+
+    <section id="reviews-list" class="px-4 py-4">
+      <#list review as r>
+      <div class="space-y-4">
+        <div class="bg-white p-4 rounded-lg shadow-sm">
           <div class="flex items-start gap-3">
-            <img class="w-10 h-10 rounded-full" src="CatImg/avatar.jpg" alt="User avatar">
+            <img class="w-10 h-10 rounded-full" src="${r.owner.imgPath!'/images/avatar.jpg'}" alt="User avatar">
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <h3 class="font-semibold">Mike Shinoda</h3>
-                <button class="text-red-600 text-sm font-medium">
-                  remove
-                </button>
+                <a href="/owner/${r.owner.ownerID}" class="font-semibold">${r.owner.username!''}</a>
+                  <a href="/admin/reviews/delete/${r.reviewID}" class="text-red-600 text-sm font-medium">remove</a>
               </div>
+              <p class="text-sm text-gray-600">Rating: ${r.rating?string("0.0")}</p>
               <div class="flex text-yellow-400 my-1">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
+                <#assign roundedRating = r.rating?round>
+                <#list 1..5 as i>
+                  <#if i <= roundedRating>
+                    <i class="fa-solid fa-star"></i>
+                  <#else>
+                    <i class="fa-regular fa-star"></i>
+                  </#if>
+                </#list>
               </div>
-              <p class="text-sm text-gray-600">Successfully reunited with my cat thanks to this app. Great experience overall!</p>
-              <div class="mt-2 p-2 bg-gray-50 rounded-lg">
-                <p class="text-sm">Tabby Cat - Downtown Street</p>
-              </div>
-            </div>
+
+          <p class="text-sm text-gray-600">${r.reviewText!''}</p>
+
+          <div class="mt-2 p-2 bg-gray-50 rounded-lg">
+            <p class="text-sm">Report ID #: ${r.foundReport.foundReportID!''}</p>
           </div>
-        </div>
-        <div id="review-3" class="bg-white p-4 rounded-lg shadow-sm">
-          <div class="flex items-start gap-3">
-            <img class="w-10 h-10 rounded-full" src="CatImg/avatar.jpg" alt="User avatar">
-            <div class="flex-1">
-              <div class="flex items-center justify-between">
-                <h3 class="font-semibold">Emma Watson</h3>
-                <button class="text-red-600 text-sm font-medium">
-                  remove
-                </button>
-              </div>
-              <div class="flex text-yellow-400 my-1">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="text-sm text-gray-600">Amazing platform! Found my lost dog within hours. The map feature was very helpful.</p>
-              <div class="mt-2 p-2 bg-gray-50 rounded-lg">
-                <p class="text-sm">Beagle - Riverside Park</p>
-              </div>
-            </div>
-          </div>
+
+          <p class="text-xs text-gray-400 mt-1">Posted: ${r.timeStamp!''}</p>
         </div>
       </div>
+</div>
+</div>
+</#list>
     </section>
   </main>
 
@@ -120,36 +78,19 @@
       <a href="sysStat.ftlh" class="text-gray-600">
         <i class="fa-solid fa-chart-line text-xl"></i>
       </a>
-      <a href="Sysadmin-dashboard.ftlh" class="text-gray-600">
+      <a href="/admin/dashboard" class="text-gray-600">
         <i class="fa-solid fa-map-location-dot text-xl"></i>
       </a>
-      <button class="text-blue-600">
+      <a href="/admin/reviews/all" class="text-blue-600">
         <i class="fa-solid fa-star text-xl"></i>
-      </button>
+      </a>
+      <a href="/admin/allusers" class="text-gray-600">
+        <i class="fa-solid fa-users text-xl"></i>
+      </a>
     </div>
   </nav>
 </div>
 
-<dialog
-        id="confirmationDialog"
-        class="p-6 bg-white rounded-md shadow-lg">
-  <h2 class="text-lg font-bold mb-4">Confirm Removal</h2>
-  <p class="text-gray-600 mb-6">Are you sure you want to remove this review?</p>
-
-  <div class="flex justify-end space-x-4">
-    <button
-            class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
-            onclick="document.getElementById('confirmationDialog').close()"
-    >
-      Cancel
-    </button>
-    <button
-            class="px-4 py-2 bg-red-600 text-white rounded-md"
-    >
-      Remove
-    </button>
-  </div>
-</dialog>
 </body>
 </html>
           

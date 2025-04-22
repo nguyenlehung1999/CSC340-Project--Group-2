@@ -3,6 +3,10 @@ package L.FPet.LFPet.Review;
 import L.FPet.LFPet.FoundPetReport.FoundPetReport;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import org.hibernate.annotations.Check;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,13 +26,16 @@ public class Review {
     @JoinColumn(name = "ownerID")
     private LostPetOwner owner;
 
+    @Min(0)
+    @Max(5)
+    @Check(constraints = "rating >= 0 AND rating <= 5")
     @Column(name = "rating", nullable = false)
     private Double rating;
 
     @Column(name = "reviewText", columnDefinition = "TEXT")
     private String reviewText;
 
-    @Column(name = "timeStamp", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false, name = "timeStamp", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime timeStamp;
 
     public Review() {
@@ -52,7 +59,7 @@ public class Review {
         this.reviewID = reviewID;
     }
 
-    public FoundPetReport foundReport() {
+    public FoundPetReport getFoundReport() {
         return foundReport;
     }
 

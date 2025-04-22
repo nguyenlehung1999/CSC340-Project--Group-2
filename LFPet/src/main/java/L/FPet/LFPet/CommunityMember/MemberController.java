@@ -1,9 +1,12 @@
 package L.FPet.LFPet.CommunityMember;
 
+import L.FPet.LFPet.FoundPetReport.FReportRepository;
+import L.FPet.LFPet.FoundPetReport.FoundPetReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -16,6 +19,9 @@ public class MemberController {
 
     @Autowired
     private MemberService service;
+
+    @Autowired
+    private FReportRepository fRepository;
 
     /**
      * Get a list of all CommunityMembers in the database.
@@ -36,8 +42,11 @@ public class MemberController {
      * @return one CommunityMember object.
      */
     @GetMapping("/{memberId}")
-    public Object getOneMember(@PathVariable int memberId) {
-        return new ResponseEntity<>(service.getMemberById(memberId), HttpStatus.OK);
+    public Object getOneMember(@PathVariable int memberId, Model model) {
+        model.addAttribute("user", service.getMemberById(memberId));
+        model.addAttribute("report", fRepository.countByMemberMemberID(memberId));
+        model.addAttribute("role", "Member");
+        return "Sys-detailedProfile";
     }
 
     /**
@@ -115,9 +124,9 @@ public class MemberController {
      * @param memberId the unique CommunityMember id.
      * @return the updated list of CommunityMember objects.
      */
-    @DeleteMapping("/delete/{memberId}")
+    @GetMapping("/delete/{memberId}")
     public Object deleteMemberById(@PathVariable int memberId) {
         service.deleteMemberById(memberId);
-        return new ResponseEntity<>(service.getAllMembers(), HttpStatus.OK);
+        return "redirect:/admin/allusers";
     }
 }

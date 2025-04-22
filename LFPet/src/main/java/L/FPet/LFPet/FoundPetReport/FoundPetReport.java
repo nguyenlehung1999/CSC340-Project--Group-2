@@ -4,6 +4,9 @@ import L.FPet.LFPet.CommunityMember.CommunityMember;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import L.FPet.LFPet.Pet.Pet;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,14 +20,17 @@ public class FoundPetReport {
 
     @ManyToOne
     @JoinColumn(name = "memberID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private CommunityMember member;
 
     @ManyToOne
     @JoinColumn(name = "ownerID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private LostPetOwner owner;
 
     @ManyToOne
     @JoinColumn(name = "petID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Pet pet;
 
     @Column(insertable = false,name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
@@ -33,13 +39,13 @@ public class FoundPetReport {
     @Column(name = "description", length = 200)
     private String description;
 
-    @Column(name = "foundDate")
+    @Column(insertable = false, name = "foundDate")
     private LocalDateTime foundDate;
 
-    @Column(name = "foundLocation", length = 100)
+    @Column(name = "foundLocation", length = 100, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private String foundLocation;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "BOOLEAN DEFAULT false")
     private boolean status;
 
     @Column(name = "type")

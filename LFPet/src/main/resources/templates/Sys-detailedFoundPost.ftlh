@@ -36,9 +36,7 @@
         <div class="flex items-center gap-4 text-sm text-gray-500">
           <span><i class="fa-regular fa-clock mr-1"></i> ${report.foundDate!''}</span>
           <span><i class="fa-solid fa-location-dot mr-1"></i> ${report.foundLocation!''}</span>
-          <button>
-          <span class="px-3 py-1 bg-gray-500 inline-flex whitespace-wrap text-white rounded-full text-sm">Remove Listing</span>
-          </button>
+          <a href="/freports/delete/${report.foundReportID}" class="px-3 py-1 bg-gray-500 inline-flex whitespace-wrap text-white rounded-full text-sm">Remove Listing</a>
         </div>
       </div>
       <div id="detailed-info" class="bg-white rounded-lg p-4 mb-6">

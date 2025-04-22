@@ -33,7 +33,7 @@ public class LostPetOwner {
     private String imgPATH;
 
     @Column(name = "status")
-    private boolean status;
+    private boolean status = true;
 
     // No-argument constructor (required by JPA)
     public LostPetOwner() {

@@ -1,5 +1,6 @@
 package L.FPet.LFPet.CommunityMember;
 
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,6 +88,9 @@ public class MemberService {
             memberRepository.save(existing);
     }
 
+    public void save(CommunityMember member) {
+        memberRepository.save(member);
+    }
     /**
      * Count the total number of CommunityMember records.
      *

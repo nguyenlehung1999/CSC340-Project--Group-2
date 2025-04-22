@@ -39,8 +39,11 @@ public class OwnerController {
      * @return one LostPetOwner object.
      */
     @GetMapping("/{ownerId}")
-    public Object getOneOwner(@PathVariable int ownerId) {
-        return new ResponseEntity<>(service.getOwnerById(ownerId), HttpStatus.OK);
+    public Object getOneOwner(@PathVariable int ownerId, Model model) {
+        model.addAttribute("user", service.getOwnerById(ownerId));
+
+        model.addAttribute("role", "Owner");
+        return "Sys-detailedProfile";
     }
 
     /**
@@ -117,9 +120,9 @@ public class OwnerController {
      * @param ownerId the unique Owner id.
      * @return the updated list of Owner objects.
      */
-    @DeleteMapping("/delete/{ownerId}")
+    @GetMapping("/delete/{ownerId}")
     public Object deleteOwnerById(@PathVariable int ownerId) {
         service.deleteOwnerById(ownerId);
-        return new ResponseEntity<>(service.getAllOwners(), HttpStatus.OK);
+        return "redirect:/admin/allusers";
     }
 }

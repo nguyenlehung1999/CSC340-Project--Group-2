@@ -31,7 +31,7 @@ public class CommunityMember {
     @Column(insertable = false, name = "joinDate", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime joinDate;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "BOOLEAN DEFAULT true")
     private boolean status;
 
     public CommunityMember() {

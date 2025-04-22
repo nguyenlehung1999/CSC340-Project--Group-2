@@ -13,7 +13,7 @@
 <div id="mobile-app" class="bg-gray-50">
   <nav id="header" class="fixed top-0 w-full bg-white border-b border-gray-100 z-50">
     <div class="flex items-center justify-between px-4 h-14">
-      <h1 class="text-lg font-semibold">L&F Pet</h1>
+      <h1 class="text-lg font-semibold">L&F Pet - Dashboard</h1>
       <div class="flex items-center gap-2">
         <a href="sysStat.ftlh" class="p-2">
           <i class="fa-solid fa-chart-simple text-gray-600"></i>
@@ -33,37 +33,40 @@
 
       <div class="space-y-4">
         <#list petReports as report>
+        <#if report.status == false>
         <div class="space-y-4">
           <div class="bg-white p-4 rounded-lg shadow-sm">
             <div class="flex gap-4">
-              <a href = "/freports/${report.foundReportID}">
+              <a href="/freports/${report.foundReportID}">
                 <#if report.pet.imgPath??>
-                <img class="w-20 h-20 rounded-lg object-cover" src="${report.pet.imgPath!''}" alt= ${report.pet.name!''}>
+                <img class="w-20 h-20 rounded-lg object-cover" src="${report.pet.imgPath!''}" alt="${report.pet.name!''}">
                 <#else>
-                <img src="/images/default.jpg" class="w-20 h-20 rounded-lg object-cover" alt= ${report.pet.name!''}>
-                </#if>
+                <img src="/images/default.jpg" class="w-20 h-20 rounded-lg object-cover" alt="${report.pet.name!''}">
+              </#if>
               </a>
               <div class="flex-1">
                 <div class="flex items-center justify-between">
-                  <a href= "/freports/${report.foundReportID}" class="font-semibold">
+                  <a href="/freports/${report.foundReportID}" class="font-semibold">
                     <#if report.pet??>
-                    ${report.pet.breed!"Unknown"}/${report.pet.species}
+                      ${report.pet.breed!"Unknown"}/${report.pet.species}
                     <#else>
-                    Unknown
+                      Unknown
                     </#if>
                   </a>
-                    <#if report.type?? && report.type>
+                  <#if report.type?? && report.type>
                     <span class="text-red-500">Lost</span>
-                    <#else>
+                  <#else>
                     <span class="text-green-500">Found</span>
-                    </#if>
+                  </#if>
                 </div>
-                <p class="text-sm text-gray-500 mt-1">${report.foundDate!''}</p>
-                <p class="text-sm text-gray-500">${report.foundLocation!''}</p>
+                  <p class="text-sm text-gray-500 mt-1">${report.foundDate!''}</p>
+                  <p class="text-sm text-gray-500">${report.foundLocation!''}</p>
+                </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </#list>
+            </#if>
+          </#list>
         </div>
     </section>
   </main>
@@ -72,11 +75,14 @@
       <a href="sysStat.ftlh" class="text-gray-600">
         <i class="fa-solid fa-chart-line text-xl"></i>
       </a>
-      <a href="Sysadmin-dashboard.ftlh" class="text-blue-600">
+      <a href= "/admin/dashboard" class="text-blue-600">
         <i class="fa-solid fa-map-location-dot text-xl"></i>
       </a>
-      <a href="Sys-review.ftlh" class="text-gray-600">
+      <a href= "/admin/reviews/all" class="text-gray-600">
         <i class="fa-regular fa-star text-xl"></i>
+      </a>
+      <a href="/admin/allusers" class="text-gray-600">
+        <i class="fa-solid fa-users text-xl"></i>
       </a>
     </div>
   </nav>

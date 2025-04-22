@@ -63,8 +63,10 @@ public class AdminController {
      * @return a list of owners and members objects.
      */
     @GetMapping("/allusers")
-    public Object getAllUsers() {
-        return new ResponseEntity<>(service.findAllUser(), HttpStatus.OK);
+    public Object getAllUsers(Model model) {
+        List<UserDTO> users = service.findAllUsersAsDTOs();
+        model.addAttribute("userDTOs", users);
+        return "Sys-userlist";
     }
 
     @GetMapping("/dashboard")
@@ -104,10 +106,13 @@ public class AdminController {
      *    "status": true
      * }
      */
-    @PutMapping("/updateowner/{ownerId}")
-    public ResponseEntity<LostPetOwner> updateOwnerStatus(@PathVariable int ownerId, @RequestBody LostPetOwner owner) {
-        service.updateOwner(ownerId, owner);
-        return new ResponseEntity<>(ownerService.getOwnerById(ownerId), HttpStatus.OK);
+
+    @PostMapping("/updateowner/{ownerId}")
+    public String toggleOwnerStatus(@PathVariable int ownerId, @RequestParam boolean status) {
+        LostPetOwner owner = ownerService.getOwnerById(ownerId);
+        owner.setStatus(status);
+        ownerService.save(owner);
+        return "redirect:/owners/" + ownerId;
     }
     /**
      * Update the status of a CommunityMember by their ID.
@@ -118,13 +123,12 @@ public class AdminController {
      *   "status": true
      * }
      */
-    @PutMapping("/updatemember/{memberId}")
-    public ResponseEntity<CommunityMember> updateMemberStatus(@PathVariable int memberId, @RequestBody CommunityMember member) {
-        //Call the service to update the member
-        service.updateMember(memberId, member);
-        //Retrieve the updated member from the database
-        CommunityMember updatedMember = memberService.getMemberById(memberId);
-        return new ResponseEntity<>(updatedMember, HttpStatus.OK);
+    @PostMapping("/updatemember/{memberId}")
+    public String toggleMemberStatus(@PathVariable int memberId, @RequestParam boolean status) {
+        CommunityMember member = memberService.getMemberById(memberId);
+        member.setStatus(status);
+        memberService.save(member);
+        return "redirect:/members/" + memberId;
     }
     /**
      * Get a list of all Reviews.
@@ -133,9 +137,10 @@ public class AdminController {
      * @return a list of Review objects.
      */
     @GetMapping("/reviews/all")
-    public ResponseEntity<List<Review>> getAllReviews() {
+    public Object getAllReviews(Model model) {
         List<Review> reviews = reviewService.getAllReviews();
-        return new ResponseEntity<>(reviews, HttpStatus.OK);
+        model.addAttribute("review", reviews);
+        return "Sys-review";
     }
     /**
      * Delete a Review object.
@@ -144,11 +149,13 @@ public class AdminController {
      * @param reviewId the unique Review id.
      * @return the updated list of Review objects.
      */
-    @DeleteMapping("/reviews/delete/{reviewId}")
-    public ResponseEntity<?> deleteReview(@PathVariable int reviewId) {
-        Review review = reviewService.getReviewById(reviewId);
+    @GetMapping("/reviews/delete/{reviewId}")
+    public Object deleteReview(@PathVariable int reviewId, Model model) {
         reviewService.deleteReviewById(reviewId);
-        return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
+        List<Review> updatedReviews = reviewService.getAllReviews();
+        model.addAttribute("review", updatedReviews);
+        return "Sys-review";
+
     }
     /**
      * Delete a Found Report object.

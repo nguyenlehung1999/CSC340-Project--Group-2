@@ -107,10 +107,9 @@ public class FReportController {
      * @param reportId the unique report ID.
      * @return the updated list of FoundPetReport objects.
      */
-    @DeleteMapping("/delete/{reportId}")
-    public ResponseEntity<?> deleteReportById(@PathVariable int reportId) {
-        FoundPetReport existing = fReportService.getReportById(reportId);
+    @GetMapping("/delete/{reportId}")
+    public Object deleteReportById(@PathVariable int reportId) {
         fReportService.deleteReportById(reportId);
-        return new ResponseEntity<>(fReportService.getAllReports(), HttpStatus.OK);
+        return "redirect:/admin/dashboard";
     }
 }
