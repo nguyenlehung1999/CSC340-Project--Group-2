@@ -44,6 +44,8 @@ public class ReviewService {
     public double getAverageRating() {
         return reviewRepository.findAverageRating();
     }
+
+
     /**
      * Add a new Review.
      *

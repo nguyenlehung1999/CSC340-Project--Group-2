@@ -15,7 +15,7 @@
         <div class="flex items-center justify-between px-4 h-14">
             <h1 class="text-lg font-semibold">L&F Pet - Users</h1>
             <div class="flex items-center gap-2">
-                <a href="/sysStat.ftlh" class="p-2">
+                <a href="/admin/statistics" class="p-2">
                     <i class="fa-solid fa-chart-simple text-gray-600"></i>
                 </a>
             </div>
@@ -61,7 +61,7 @@
 
 <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
     <div class="flex justify-around items-center h-16">
-        <a href="sysStat.ftlh" class="text-gray-600">
+        <a href="/admin/statistics" class="text-gray-600">
             <i class="fa-solid fa-chart-line text-xl"></i>
         </a>
         <a href="/admin/dashboard" class="text-gray-600">

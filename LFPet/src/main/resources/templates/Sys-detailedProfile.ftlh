@@ -126,7 +126,7 @@
 
 <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
     <div class="flex justify-around items-center h-16">
-        <a href="sysStat.ftlh" class="text-gray-600">
+        <a href="/admin/statistics" class="text-gray-600">
             <i class="fa-solid fa-chart-line text-xl"></i>
         </a>
         <a href="/admin/dashboard" class="text-gray-600">

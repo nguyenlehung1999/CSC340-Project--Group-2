@@ -6,7 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body class="h-full text-base-content">
@@ -16,62 +16,88 @@
       <h1 class="text-xl font-semibold text-gray-800">System Statistics</h1>
     </div>
   </nav>
+
   <main id="main-content" class="pt-14 pb-16">
     <section id="overview-cards" class="p-4 grid grid-cols-2 gap-4">
       <div class="bg-white p-4 rounded-lg shadow-sm">
         <div class="flex flex-col items-center">
           <i class="fa-solid fa-users text-neutral-600 text-2xl mb-2"></i>
-          <span class="text-2xl">2,547</span>
+          <span class="text-2xl">${totalUsers!0}</span>
           <span class="text-sm text-neutral-500">Total Accounts</span>
         </div>
       </div>
       <div class="bg-white p-4 rounded-lg shadow-sm">
         <div class="flex flex-col items-center">
           <i class="fa-solid fa-user text-neutral-600 text-2xl mb-2"></i>
-          <span class="text-2xl">1,892</span>
-          <span class="text-sm text-neutral-500">User Accounts</span>
+          <span class="text-2xl">${activeMembers!0}</span>
+          <span class="text-sm text-neutral-500">Active Members</span>
         </div>
       </div>
       <div class="bg-white p-4 rounded-lg shadow-sm">
         <div class="flex flex-col items-center">
           <i class="fa-solid fa-store text-neutral-600 text-2xl mb-2"></i>
-          <span class="text-2xl">655</span>
-          <span class="text-sm text-neutral-500">Provider Accounts</span>
+          <span class="text-2xl">${activeOwners!0}</span>
+          <span class="text-sm text-neutral-500">Active Owners</span>
         </div>
       </div>
       <div class="bg-white p-4 rounded-lg shadow-sm">
         <div class="flex flex-col items-center">
           <i class="fa-solid fa-handshake text-neutral-600 text-2xl mb-2"></i>
-          <span class="text-2xl">423</span>
+          <span class="text-2xl">${successfulReunions!0}</span>
           <span class="text-sm text-neutral-500">Reunions</span>
         </div>
       </div>
     </section>
+
     <section id="graph-section" class="px-4 py-2">
       <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-        <h2 class="text-lg mb-4">Account Growth</h2>
-        <div class="h-[200px] bg-neutral-100 rounded-lg flex items-center justify-center">
-          <span class="text-neutral-500">Graph Placeholder</span>
+        <h2 class="text-lg mb-4 font-semibold">Pet Report Breakdown</h2>
+
+        <#-- Assign model attributes safely -->
+        <#assign found = totalFoundPets!0>
+        <#assign lost = totalLostPets!0>
+        <#assign total = found + lost>
+
+        <#if total != 0>
+        <#assign foundPercent = (found * 100 / total)?round>
+        <#assign lostPercent = 100 - foundPercent>
+        <#else>
+        <#assign foundPercent = 0>
+        <#assign lostPercent = 0>
+      </#if>
+
+      <div class="flex flex-col items-center">
+        <div class="relative w-32 h-32 rounded-full bg-[conic-gradient(#10b981_0%_${foundPercent}%,#ef4444_${foundPercent}%_100%)]">
+          <div class="absolute inset-2 bg-white rounded-full"></div>
+        </div>
+
+        <div class="mt-4 text-sm text-center space-y-1">
+          <p>
+            <span class="inline-block w-3 h-3 bg-[#10b981] rounded-full mr-2"></span>
+            Found Pets (${foundPercent}%)
+          </p>
+          <p>
+            <span class="inline-block w-3 h-3 bg-[#ef4444] rounded-full mr-2"></span>
+            Lost Pets (${lostPercent}%)
+          </p>
         </div>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow-sm">
-        <h2 class="text-lg mb-4">Monthly Reunions</h2>
-        <div class="h-[200px] bg-neutral-100 rounded-lg flex items-center justify-center">
-          <span class="text-neutral-500">Graph Placeholder</span>
-        </div>
-      </div>
-    </section>
+</div>
+</section>
   </main>
   <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
     <div class="flex justify-around items-center h-16">
-      <button class="text-blue-600">
+      <a href="/admin/statistics" class="text-blue-600">
         <i class="fa-solid fa-chart-line text-xl"></i>
-      </button>
-      <a href="Sysadmin-dashboard.ftlh" class="text-gray-600">
+      </a>
+      <a href="/admin/dashboard" class="text-gray-600">
         <i class="fa-solid fa-map-location-dot text-xl"></i>
       </a>
-      <a href="Sys-review.ftlh" class="text-gray-600">
+      <a href="/admin/reviews/all" class="text-gray-600">
         <i class="fa-regular fa-star text-xl"></i>
+      </a>
+      <a href="/admin/allusers" class="text-gray-600">
+        <i class="fa-solid fa-users text-xl"></i>
       </a>
     </div>
   </nav>

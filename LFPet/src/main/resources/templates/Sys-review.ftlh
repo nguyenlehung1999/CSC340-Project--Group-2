@@ -18,18 +18,14 @@
 
   <main id="main-content" class="pt-14 pb-16">
     <section id="stats-section" class="p-4 bg-white border-b border-gray-100">
-      <div class="grid grid-cols-3 gap-4">
-        <div class="text-center">
-          <p class="text-2xl font-semibold text-blue-600">124</p>
+      <div class="grid grid-cols-2 gap-4 text-center">
+        <div>
+          <p class="text-2xl font-semibold text-blue-600">${countReview!0}</p>
           <p class="text-xs text-gray-500">Total Reviews</p>
         </div>
-        <div class="text-center">
-          <p class="text-2xl font-semibold text-yellow-600">4.8</p>
+        <div>
+          <p class="text-2xl font-semibold text-yellow-600">${averageRating!0.0}</p>
           <p class="text-xs text-gray-500">Avg Rating</p>
-        </div>
-        <div class="text-center">
-          <p class="text-2xl font-semibold text-green-600">89%</p>
-          <p class="text-xs text-gray-500">Success Rate</p>
         </div>
       </div>
     </section>
@@ -75,7 +71,7 @@
 
   <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
     <div class="flex justify-around items-center h-16">
-      <a href="sysStat.ftlh" class="text-gray-600">
+      <a href="/admin/statistics" class="text-gray-600">
         <i class="fa-solid fa-chart-line text-xl"></i>
       </a>
       <a href="/admin/dashboard" class="text-gray-600">

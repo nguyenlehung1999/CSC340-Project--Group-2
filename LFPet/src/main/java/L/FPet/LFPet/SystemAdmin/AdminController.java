@@ -140,6 +140,8 @@ public class AdminController {
     public Object getAllReviews(Model model) {
         List<Review> reviews = reviewService.getAllReviews();
         model.addAttribute("review", reviews);
+        model.addAttribute("countReview", reviewService.getReviewCount());
+        model.addAttribute("averageRating", Math.round(reviewService.getAverageRating() * 10.0) / 10.0);
         return "Sys-review";
     }
     /**
@@ -153,9 +155,10 @@ public class AdminController {
     public Object deleteReview(@PathVariable int reviewId, Model model) {
         reviewService.deleteReviewById(reviewId);
         List<Review> updatedReviews = reviewService.getAllReviews();
+        model.addAttribute("averageRating", Math.round(reviewService.getAverageRating() * 10.0) / 10.0);
+        model.addAttribute("countReview", reviewService.getReviewCount());
         model.addAttribute("review", updatedReviews);
-        return "Sys-review";
-
+        return "redirect:/admin/reviews/all";
     }
     /**
      * Delete a Found Report object.
@@ -188,20 +191,19 @@ public class AdminController {
      * URL: http://localhost:8080/admin/statistics
      */
     @GetMapping("/statistics")
-    public ResponseEntity<Map<String, Object>> getStats() {
-        Map<String, Object> stats = new LinkedHashMap<>();
-        stats.put("totalPets", petService.countPets());
-        stats.put("totalFoundPets", (petService.getPetsByStatus(true)).size());
-        stats.put("totalLostPets", (petService.getPetsByStatus(false)).size());
-        stats.put("successfulReunions", (fReportService.getFReportsByStatus(true)).size());
-        stats.put("totalReviews", reviewService.getReviewCount());
-        stats.put("averageRating", Math.round(reviewService.getAverageRating() * 100.0) / 100.0);
-        stats.put("totalUsers", memberService.countMembers() + ownerService.countOwners());
-        stats.put("activeOwners", (ownerService.getOwnersByStatus(true)).size());
-        stats.put("bannedOwners", (ownerService.getOwnersByStatus(false)).size());
-        stats.put("activeMembers", (memberService.getMembersByStatus(true)).size());
-        stats.put("bannedMembers", (memberService.getMembersByStatus(false)).size());
+    public String getStats(Model model) {
+        model.addAttribute("totalPets", petService.countPets());
+        model.addAttribute("totalFoundPets", petService.getPetsByStatus(true).size());
+        model.addAttribute("totalLostPets", petService.getPetsByStatus(false).size());
+        model.addAttribute("successfulReunions", fReportService.getFReportsByStatus(true).size());
+        model.addAttribute("totalReviews", reviewService.getReviewCount());
+        model.addAttribute("averageRating", Math.round(reviewService.getAverageRating() * 100.0) / 100.0);
+        model.addAttribute("totalUsers", memberService.countMembers() + ownerService.countOwners());
+        model.addAttribute("activeOwners", ownerService.getOwnersByStatus(true).size());
+        model.addAttribute("bannedOwners", ownerService.getOwnersByStatus(false).size());
+        model.addAttribute("activeMembers", memberService.getMembersByStatus(true).size());
+        model.addAttribute("bannedMembers", memberService.getMembersByStatus(false).size());
 
-        return new ResponseEntity<>(stats, HttpStatus.OK);
+        return "Sys-stat";
     }
 }

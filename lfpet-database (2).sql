@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2025 at 06:40 AM
+-- Generation Time: Apr 23, 2025 at 05:18 AM
 -- Server version: 8.0.41
 -- PHP Version: 8.2.28
 
@@ -33,7 +33,7 @@ CREATE TABLE `communitymember` (
   `imgpath` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `join_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` bit(1) DEFAULT NULL,
+  `status` bit(1) NOT NULL DEFAULT b'1',
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fullname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -45,7 +45,7 @@ CREATE TABLE `communitymember` (
 INSERT INTO `communitymember` (`memberid`, `email`, `imgpath`, `join_date`, `password`, `status`, `username`, `fullname`) VALUES
 (1, 'jane@example.com', 'profile1.jpg', '2025-04-02 01:32:35', 'secret', b'1', 'jane_doe', 'Jane Doe'),
 (2, 'smith@example.com', 'profile2.jpg', '2025-04-09 01:32:38', 'secret', b'0', 'Agent Smith', 'Agent Smith'),
-(3, 'cindy@example.com', 'profile3.jpg', '2025-04-16 01:32:40', 'secret', b'1', 'Cindy Thai Tai', 'Cindy Thai Tai'),
+(3, 'cindy@example.com', 'profile3.jpg', '2025-04-16 01:32:40', 'secret', b'0', 'Cindy Thai Tai', 'Cindy Thai Tai'),
 (4, 'kenny@example.com', 'profile4.jpg', '2025-04-15 01:32:43', 'secret', b'1', 'Kenny Sang', 'Kenny Sang'),
 (5, 'adam@example.com', 'profile5.jpg', '2025-04-14 01:32:46', 'secret', b'1', 'Adam Lee', 'Adam Lee'),
 (6, 'ginny@example.com', 'profile6.jpg', '2025-04-11 01:32:49', 'secret', b'1', 'Ginny V', 'Ginny V'),
@@ -53,7 +53,8 @@ INSERT INTO `communitymember` (`memberid`, `email`, `imgpath`, `join_date`, `pas
 (8, '6phung@example.com', 'profile7.jpg', '2025-04-06 01:32:53', 'secret', b'1', 'Luc Tieu Phung', 'Luc Tieu Phung'),
 (9, 'dfinder@example.com', 'sampleimage.jpg', '2025-03-31 20:28:51', 'secret', b'1', 'Dog_finder', 'John Smith'),
 (10, 'dwhisperer@example.com', 'sampleimage.jpg', '2025-03-31 20:29:51', 'secret', b'1', 'Dog_whisperer', 'Adam Smith'),
-(11, 'nekojin@example.com', 'sampleimage.jpg', '2025-03-31 20:30:21', 'secret', b'1', 'Cat_man', 'Chet Baker');
+(11, 'nekojin@example.com', 'sampleimage.jpg', '2025-03-31 20:30:21', 'secret', b'1', 'Cat_man', 'Chet Baker'),
+(12, 'somemember@hotmail.com', NULL, '2025-04-22 22:56:56', 'somepa', b'1', 'Some Member', 'Community Member');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `foundpetreport` (
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `found_date` datetime(6) DEFAULT NULL,
   `found_location` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` bit(1) DEFAULT NULL,
+  `status` bit(1) DEFAULT b'0',
   `memberid` int DEFAULT NULL,
   `petid` int DEFAULT NULL,
   `type` bit(1) DEFAULT NULL,
@@ -79,17 +80,19 @@ CREATE TABLE `foundpetreport` (
 --
 
 INSERT INTO `foundpetreport` (`found_reportid`, `createdat`, `description`, `found_date`, `found_location`, `status`, `memberid`, `petid`, `type`, `ownerid`) VALUES
-(1, NULL, NULL, '2025-04-15 12:52:14.000000', 'Downtown Park', b'0', 1, 15, b'0', NULL),
-(2, NULL, NULL, '2025-04-17 18:52:21.000000', NULL, b'0', NULL, 14, b'1', 6),
-(3, NULL, NULL, '2025-04-09 18:52:24.000000', '4th avenue intersect', b'0', 8, 17, b'0', NULL),
-(5, NULL, NULL, '2025-04-16 18:52:27.000000', '4th avenue intersect', b'0', 1, 1, b'1', 8),
-(7, NULL, NULL, '2025-04-23 18:52:29.000000', '4th avenue intersect', b'0', 1, 2, b'1', 9),
-(8, NULL, NULL, '2025-04-14 18:52:31.000000', '4th avenue intersect', b'0', 1, 3, b'0', NULL),
+(1, '2025-04-08 21:21:43', NULL, '2025-04-15 12:52:14.000000', 'Downtown Park', b'1', 1, 15, b'0', NULL),
+(2, '2025-04-16 21:21:46', NULL, '2025-04-17 18:52:21.000000', NULL, b'1', NULL, 14, b'1', 6),
+(3, '2025-04-20 21:21:48', NULL, '2025-04-09 18:52:24.000000', '4th avenue intersect', b'1', 8, 17, b'0', NULL),
+(5, '2025-04-13 21:21:52', NULL, '2025-04-16 18:52:27.000000', '4th avenue intersect', b'0', 1, 1, b'1', 8),
+(7, '2025-04-11 21:21:54', NULL, '2025-04-23 18:52:29.000000', '4th avenue intersect', b'0', 1, 2, b'1', 9),
+(8, '2025-04-19 21:21:57', NULL, '2025-04-14 18:52:31.000000', '4th avenue intersect', b'1', 1, 3, b'0', NULL),
 (16, '2025-03-31 16:53:53', NULL, '2025-04-06 18:52:34.000000', '4th avenue intersect', b'0', 4, 9, b'0', NULL),
-(17, '2025-03-31 20:12:38', NULL, '2025-04-08 18:52:37.000000', 'near UNCG', b'0', 4, 29, b'1', 3),
+(17, '2025-03-31 20:12:38', NULL, '2025-04-08 18:52:37.000000', 'near UNCG', b'1', 4, 29, b'1', 3),
 (18, '2025-03-31 20:13:12', NULL, '2025-04-01 18:52:39.000000', 'near UNCG police station', b'0', 5, 28, b'0', NULL),
 (22, '2025-04-21 22:02:52', 'for test and delete', '2025-04-11 22:02:08.000000', 'for test and delete', b'0', 7, 12, b'0', NULL),
-(23, '2025-04-21 22:05:05', 'for test and delete', '2025-04-08 22:04:40.000000', 'for test and delete', b'0', 9, 31, b'0', NULL);
+(23, '2025-04-21 22:05:05', 'for test and delete', '2025-04-08 22:04:40.000000', 'for test and delete', b'0', 9, 31, b'0', NULL),
+(24, '2025-04-22 21:25:22', NULL, '2025-04-22 21:24:25.000000', 'Cowles mountain', b'0', NULL, 15, b'1', 7),
+(25, '2025-04-22 21:26:29', 'brown and smol', '2025-04-16 21:26:57.000000', 'by the fountain', b'0', 2, 31, b'0', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,7 +105,7 @@ CREATE TABLE `lostpetowner` (
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `imgpath` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `status` bit(1) DEFAULT NULL,
+  `status` bit(1) NOT NULL DEFAULT b'1',
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `join_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `fullname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
@@ -116,13 +119,17 @@ INSERT INTO `lostpetowner` (`ownerid`, `email`, `imgpath`, `password`, `status`,
 (1, 'john@example.com', 'profile1.jpg', 'secret', b'1', 'john_doe', '2025-03-31 20:27:31', 'John Nguyen'),
 (2, 'john_updated@example.com', 'newprofile.jpg', 'newsecret', b'1', 'john_doe_updated', '2025-03-31 20:27:31', 'Diff John'),
 (3, 'Tom@example.com', 'profile3.jpg', 'secret', b'1', 'Tommy Teo', '2025-03-31 20:27:31', '	 Tommy Teo'),
-(4, 'jimm@example.com', 'profile4.jpg', 'secret', b'0', 'Jimmy Nguyen', '2025-03-31 20:27:31', 'Jimmy Nguyen'),
+(4, 'jimm@example.com', 'profile4.jpg', 'secret', b'1', 'Jimmy Nguyen', '2025-03-31 20:27:31', 'Jimmy Nguyen'),
 (5, 'Tony@example.com', 'profile5.jpg', 'secret', b'1', 'Tony from LCSign', '2025-03-31 20:27:31', 'Tony Lee'),
 (6, 'carrick@example.com', 'profile6.jpg', 'secret', b'1', 'Carrick William', '2025-03-31 20:27:31', 'Carrick William'),
 (7, 'Lumen@example.com', 'profile6.jpg', 'secret', b'1', 'Lumen Nguyen', '2025-03-31 20:27:31', 'Lumen Nguyen'),
 (8, 'edwar@example.com', 'profile8.jpg', 'secret', b'1', 'Edward Norton', '2025-03-31 20:27:31', 'Edward Norton'),
 (9, 'liz@example.com', 'profile9.jpg', 'secret', b'1', 'Elizabeth Wood', '2025-03-31 20:27:31', 'Edward Norton'),
-(10, 'honda@example.com', 'profile10.jpg', 'secret', b'1', 'Honda Suzuki', '2025-03-31 20:27:31', 'Honda Suzuki');
+(10, 'honda@example.com', 'profile10.jpg', 'secret', b'1', 'Honda Suzuki', '2025-03-31 20:27:31', 'Honda Suzuki'),
+(11, 'email@gmaill.com', NULL, 'password', b'1', 'Some Account', '2025-04-22 22:30:31', 'Some Name'),
+(13, 'something@yahoo.com', NULL, 'averystrongpassword', b'0', 'A Random Guy', '2025-04-22 22:40:26', 'Random Guy'),
+(15, 'asd', NULL, '12', b'0', 'ad', '2025-04-22 22:48:01', 'asd'),
+(18, 'asd', 'asd', 'asd', b'1', 'asd', '2025-04-22 22:54:40', 'ads');
 
 -- --------------------------------------------------------
 
@@ -221,10 +228,18 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`reviewid`, `rating`, `review_text`, `time_stamp`, `found_reportid`, `ownerid`) VALUES
-(1, 4, 'Great service!', NULL, 1, 2),
-(2, 5, 'Great service!', NULL, 2, 3),
-(3, 5, 'Great service!', NULL, 3, 4),
-(7, 5, 'Great service!', NULL, 5, 4);
+(1, 4, 'Great service!', '1900-01-17 00:00:00', 1, 2),
+(2, 5, 'Great service!', '2025-04-17 00:00:00', 2, 3),
+(3, 5, 'Great service!', '2025-04-16 21:07:26', 3, 4),
+(7, 5, 'Great service!', '2025-04-02 21:07:23', 5, 4),
+(8, 3, 'thank you', '2025-04-22 20:59:12', 8, 10),
+(11, 5, 'something irrelevant', '2025-04-22 20:59:58', 17, 4),
+(12, 4.5, 'The weather is nice over here.', '2025-04-22 21:02:50', 16, 9),
+(15, 0, 'a bad review', '2025-04-23 00:05:38', 25, 11),
+(16, 1, 'another bad review', '2025-04-23 00:05:53', 22, 2),
+(37, 0.5, 'a bad review', '2025-04-23 00:54:48', 24, 13),
+(38, 0.5, 'another bad review', '2025-04-23 00:55:15', 23, 2),
+(42, 1, 'a different bad review', '2025-04-23 01:02:55', 18, 7);
 
 -- --------------------------------------------------------
 
@@ -304,19 +319,19 @@ ALTER TABLE `systemadmin`
 -- AUTO_INCREMENT for table `communitymember`
 --
 ALTER TABLE `communitymember`
-  MODIFY `memberid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `memberid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `foundpetreport`
 --
 ALTER TABLE `foundpetreport`
-  MODIFY `found_reportid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `found_reportid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `lostpetowner`
 --
 ALTER TABLE `lostpetowner`
-  MODIFY `ownerid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ownerid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `lostpetreport`
@@ -334,7 +349,7 @@ ALTER TABLE `pet`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `reviewid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `reviewid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `systemadmin`
