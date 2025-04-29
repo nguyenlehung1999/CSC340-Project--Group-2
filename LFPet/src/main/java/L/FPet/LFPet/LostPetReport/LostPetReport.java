@@ -12,7 +12,7 @@ public class LostPetReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lostReportID")
+    @Column(name = "lost_reportid")
     private Integer lostReportID;
 
     @OneToOne

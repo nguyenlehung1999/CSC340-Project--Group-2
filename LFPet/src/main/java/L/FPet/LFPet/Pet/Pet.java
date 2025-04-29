@@ -35,6 +35,7 @@ public class Pet {
     @JoinColumn(name = "memberID")
     private CommunityMember member;
 
+    @Column(name = "img_path")
     private String imgPath;
 
     private boolean status;

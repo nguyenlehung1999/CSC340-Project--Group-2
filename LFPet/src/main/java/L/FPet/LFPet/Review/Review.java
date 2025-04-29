@@ -15,7 +15,7 @@ public class Review {
     private Integer reviewID;
 
     @OneToOne
-    @JoinColumn(name = "foundReportID")
+    @JoinColumn(name = "found_reportid")
     private FoundPetReport foundReport;
 
     @ManyToOne
@@ -25,11 +25,12 @@ public class Review {
     @Column(name = "rating", nullable = false)
     private Integer rating;
 
-    @Column(name = "reviewText", columnDefinition = "TEXT")
+    @Column(name = "review_text", columnDefinition = "TEXT")
     private String reviewText;
 
     @Column(name = "timeStamp", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime timeStamp;
+
 
     public Review() {
     }
@@ -90,5 +91,10 @@ public class Review {
 
     public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.timeStamp = LocalDateTime.now();
     }
 }

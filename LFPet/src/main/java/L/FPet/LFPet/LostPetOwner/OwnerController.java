@@ -1,5 +1,9 @@
 package L.FPet.LFPet.LostPetOwner;
 
+import L.FPet.LFPet.FoundPetReport.FReportRepository;
+import L.FPet.LFPet.LostPetReport.LReportRepository;
+import L.FPet.LFPet.Review.Review;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +17,16 @@ import org.springframework.web.bind.annotation.*;
  * OwnerController.java.
  * Includes all REST API endpoint mappings for the LostPetOwner object.
  */
-@RestController
+@Controller
 @RequestMapping("/owners")
 public class OwnerController {
 
     @Autowired
     private OwnerService service;
+    @Autowired
+    private FReportRepository rRepository;
+    @Autowired
+    private LReportRepository lRepository;
 
     /**
      * Get a list of all Owners in the database.
@@ -82,11 +90,98 @@ public class OwnerController {
      * @param owner the new LostPetOwner object.
      * @return the updated list of Owner objects.
      */
+
+
+
     @PostMapping("/new")
-    public Object addNewOwner(@RequestBody LostPetOwner owner) {
+    public Object addNewOwner(LostPetOwner owner) {
         service.addNewOwner(owner);
-        return new ResponseEntity<>(service.getAllOwners(), HttpStatus.CREATED);
+        //return new ResponseEntity<>(service.getAllOwners(), HttpStatus.CREATED);
+        return "redirect:/owners/dashboard";
     }
+
+    @GetMapping("/LoginPage")
+    public String showLogInPage(Model model) {
+        model.addAttribute("owner", new LostPetOwner());
+        model.addAttribute("title", "Log In Owner");
+        return "myloginPage";
+    }
+
+//    @GetMapping("/dashboard")
+//    public String showDashboard(HttpSession session, Model model) {
+//        String email = (String) session.getAttribute("loggedInEmail");
+//
+//        if (email == null) {
+//            return "redirect:/owners/LoginPage";  // Not logged in
+//        }
+//
+//        LostPetOwner owner = service.getOwnerByEmail(email);
+//        model.addAttribute("petReports", rRepository.allReports());
+//        model.addAttribute("title", "Dashboard");
+//
+//        return "Cus-dash";
+//    }
+@GetMapping("/dashboard")
+public String getAllReports(HttpSession session, Model model) {
+    String email = (String) session.getAttribute("loggedInEmail");
+    if (email == null) {
+        return "redirect:/owners/LoginPage";
+    }
+    model.addAttribute("petReports", lRepository.allReports());
+    model.addAttribute("title", "Dashboard");
+    return "Cus-dash";
+}
+
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model) {
+        String email = (String) session.getAttribute("loggedInEmail");
+        if (email == null) return "redirect:/owners/LoginPage";
+
+        LostPetOwner owner = service.getOwnerByEmail(email);
+        model.addAttribute("owner", owner);
+        return "userProfile";
+    }
+
+    @PostMapping("/profile")
+    public String updateProfile(@ModelAttribute LostPetOwner updatedOwner, HttpSession session) {
+        String email = (String) session.getAttribute("loggedInEmail");
+        if (email == null) return "redirect:/owners/LoginPage";
+
+        LostPetOwner existingOwner = service.getOwnerByEmail(email);
+        if (existingOwner == null) return "redirect:/owners/LoginPage";
+
+
+        updatedOwner.setOwnerID(existingOwner.getOwnerID());
+        updatedOwner.setEmail(existingOwner.getEmail());
+        updatedOwner.setPassword(existingOwner.getPassword());
+
+        service.updateOwner(updatedOwner.getOwnerID(), updatedOwner);
+
+        return "redirect:/owners/profile";
+    }
+
+
+
+
+    @PostMapping("/LoginPage")
+    public String LogInOwner(@RequestParam String email, @RequestParam String password, HttpSession session) {
+        LostPetOwner owner = service.getOwnerByEmail(email); // Use the existing method
+
+        if (owner != null && owner.getPassword().equals(password)) { // Assuming it's getPassword()
+            session.setAttribute("loggedInEmail", email);
+            return "redirect:/owners/dashboard";
+        }
+
+        return "redirect:/owners/LoginPage?error=true";
+    }
+
+    @GetMapping("/SignUp")
+    public String SignInOwner(Model model) {
+        model.addAttribute("owner", new LostPetOwner());
+        model.addAttribute("title", "Add New Lost Pet Owner");
+        return "mysignUpPage";
+    }
+
 
     /**
      * Update an existing Owner object.
@@ -105,11 +200,11 @@ public class OwnerController {
      * @param owner   the updated LostPetOwner details.
      * @return the updated LostPetOwner object.
      */
-    @PutMapping("/update/{ownerId}")
-    public Object updateOwner(@PathVariable int ownerId, @RequestBody LostPetOwner owner) {
-        service.updateOwner(ownerId, owner);
-        return new ResponseEntity<>(service.getOwnerById(ownerId), HttpStatus.CREATED);
-    }
+//    @PutMapping("/update/{ownerId}")
+//    public Object updateOwner(@PathVariable int ownerId, @RequestBody LostPetOwner owner) {
+//        service.updateOwner(ownerId, owner);
+//        return new ResponseEntity<>(service.getOwnerById(ownerId), HttpStatus.CREATED);
+//    }
 
     /**
      * Delete an Owner object.

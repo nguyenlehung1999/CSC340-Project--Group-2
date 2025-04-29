@@ -11,7 +11,7 @@ public class FoundPetReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "foundReportID")
+    @Column(name = "found_reportid")
     private Integer foundReportID;
 
     @ManyToOne

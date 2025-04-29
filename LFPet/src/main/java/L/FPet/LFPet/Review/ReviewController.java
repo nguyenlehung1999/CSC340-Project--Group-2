@@ -1,18 +1,26 @@
 package L.FPet.LFPet.Review;
 
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
+import L.FPet.LFPet.LostPetOwner.OwnerService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+
 
 /**
  * ReviewController.java
  * Includes all REST API endpoint mappings for the Review object.
  */
-@RestController
+@Controller
 @RequestMapping("/reviews")
 public class ReviewController {
 
+    @Autowired
+    private OwnerService ownerService;
     @Autowired
     private ReviewService reviewService;
 
@@ -23,9 +31,13 @@ public class ReviewController {
      * @return a list of Review objects.
      */
     @GetMapping("/all")
-    public ResponseEntity<?> getAllReviews() {
-        return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
+    public Object getAllReviews(Model model) {
+        //return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
+        model.addAttribute("reviewList", reviewService.getAllReviews());
+        model.addAttribute("title", "All Reviews");
+        return "review-list";
     }
+
 
     /**
      * Get a specific Review by its ID.
@@ -39,6 +51,11 @@ public class ReviewController {
         Review review = reviewService.getReviewById(reviewId);
         return new ResponseEntity<>(review, (review != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
+
+
+
+
+
 
     /**
      * Create a new Review entry.
@@ -61,10 +78,30 @@ public class ReviewController {
      * @return the updated list of Review objects, or the created Review object.
      */
     @PostMapping("/new")
-    public ResponseEntity<?> addNewReview(@RequestBody Review review) {
-        reviewService.addNewReview(review);
-        return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.CREATED);
+    public Object addNewReview(Review review, HttpSession session) {
+        String email = (String) session.getAttribute("loggedInEmail");
+
+        if (email == null) {
+            return "redirect:/owners/LoginPage";
+        }
+
+        LostPetOwner owner = ownerService.getOwnerByEmail(email);
+        if (owner != null) {
+            review.setOwner(owner);
+            reviewService.addNewReview(review);
+        }
+
+        return "redirect:/owners/dashboard";
     }
+
+    @GetMapping("/createForm")
+    public String showCreateForm(Model model) {
+        Review review = new Review();
+        model.addAttribute("review", review);
+        model.addAttribute("title", "Create New Review");
+        return "createReview";
+    }
+
 
     /**
      * Update an existing Review object.

@@ -12,6 +12,7 @@ public class OwnerService {
     @Autowired
     private OwnerRepository ownerRepository;
 
+
     /**
      * Fetch all LostPetOwner records.
      *
@@ -24,11 +25,11 @@ public class OwnerService {
     /**
      * Fetch a specific owner by their ID.
      *
-     * @param ownerId the unique ID of the owner.
+     * @param ownerID the unique ID of the owner.
      * @return a LostPetOwner object, or null if not found.
      */
-    public LostPetOwner getOwnerById(int ownerId) {
-        return ownerRepository.findById(ownerId).orElse(null);
+    public LostPetOwner getOwnerById(int ownerID) {
+        return ownerRepository.findById(ownerID).orElse(null);
     }
 
     /**
@@ -73,18 +74,24 @@ public class OwnerService {
     /**
      * Update an existing owner.
      *
-     * @param ownerId the unique ID of the owner to update.
+     * @param ownerID the unique ID of the owner to update.
      * @param owner   the updated LostPetOwner object.
      */
-    public void updateOwner(int ownerId, LostPetOwner owner) {
-        LostPetOwner existing = getOwnerById(ownerId);
+    public void updateOwner(int ownerID, LostPetOwner owner) {
+        LostPetOwner existing = getOwnerById(ownerID);
+
         existing.setUsername(owner.getUsername());
         existing.setPassword(owner.getPassword());
-        existing.setEmail(owner.getEmail());
+        existing.setFullname(owner.getFullname());
+        existing.setImgPATH(owner.getImgPATH());
+        // Remove this line to prevent null/overwriting the email:
+        // existing.setEmail(owner.getEmail());
+
         existing.setImgPATH(owner.getImgPATH());
 
         ownerRepository.save(existing);
     }
+
 
     /**
      * Count the total number of LostPetOwner records.
@@ -113,4 +120,6 @@ public class OwnerService {
     public List<LostPetOwner> searchOwnersByUsername(String search) {
         return ownerRepository.searchByUsernameContains(search);
     }
+
+
 }
