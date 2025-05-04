@@ -35,12 +35,17 @@
                     <div class="bg-white p-4 rounded-lg shadow-sm">
                         <div class="flex gap-4">
                             <a href = "/lreports/${report.lostReportID}">
-                                <#if report.pet.imgPath??>
-                                <img class="w-20 h-20 rounded-lg object-cover" src="${report.pet.imgPath!''}" alt= ${report.pet.name!''}>
+                                <#if report.pet??>
+                                 <#if report.pet.imgPath??>
+                                <img class="w-20 h-20 rounded-lg object-cover" src="${report.pet.imgPath!''}" alt="${report.pet.name!''}">
                                 <#else>
-                                <img src="/images/default.jpg" class="w-20 h-20 rounded-lg object-cover" alt= ${report.pet.name!''}>
+                                <img src="/images/default.jpg" class="w-20 h-20 rounded-lg object-cover" alt="${report.pet.name!''}">
                             </#if>
-                            </a>
+                            <#else>
+                            <img src="/images/default.jpg" class="w-20 h-20 rounded-lg object-cover" alt="Unknown">
+                        </#if>
+
+                        </a>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between">
                                     <a href= "/lreports/${report.lostReportID}" class="font-semibold">
@@ -71,7 +76,7 @@
         <a href="/reviews/createForm" class="text-gray-600">
             <i class="fa-regular fa-star text-xl"></i>
         </a>
-        <a href="Sysadmin-dashboard.ftlh" class="text-blue-600">
+        <a href="/lreports/listaPet" class="text-blue-600">
             <i class="fa-solid fa-map-location-dot text-xl"></i>
         </a>
         <a href="profile" class="text-gray-600">

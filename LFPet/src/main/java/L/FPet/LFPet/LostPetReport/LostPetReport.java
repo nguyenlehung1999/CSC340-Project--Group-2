@@ -15,7 +15,7 @@ public class LostPetReport {
     @Column(name = "lost_reportid")
     private Integer lostReportID;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "petID")
     private Pet pet;
 
@@ -29,7 +29,7 @@ public class LostPetReport {
     @Column(name = "lastSeen")
     private LocalDateTime lastSeen;
 
-    @Column(name = "lostLocation", length = 100)
+    @Column(name = "lost_location", length = 100)
     private String lostLocation;
 
     @Column(name = "status")
