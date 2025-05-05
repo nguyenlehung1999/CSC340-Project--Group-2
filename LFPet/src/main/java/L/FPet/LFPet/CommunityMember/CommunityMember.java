@@ -1,4 +1,4 @@
-package L.FPet.LFPet.CommunityMember;
+package com.example.LostPetFinder;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -9,8 +9,13 @@ public class CommunityMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
     @Column(name = "memberID")
     private Integer memberID;
+
+    @Column(name = "email", length = 100,nullable = false)
+    private String email;
 
     @Column(name = "username", length = 50, nullable = false)
     private String username;
@@ -18,8 +23,7 @@ public class CommunityMember {
     @Column(name = "password", length = 50, nullable = false)
     private String password;
 
-    @Column(name = "email", length = 100, nullable = false)
-    private String email;
+
 
     @Column(name = "imgPATH", length = 100)
     private String imgPATH;
@@ -30,12 +34,18 @@ public class CommunityMember {
 
     @Column(name = "status")
     private boolean status;
+    @Column(name = "reviewId")
+    private Integer reviewId;
+    @Column(name = "pets_helped")
+    private int petsHelped;
+
+
 
     public CommunityMember() {
     }
 
     public CommunityMember(Integer memberID, String username, String password, String email,
-                           String imgPATH, LocalDateTime joinDate, boolean status) {
+                           String imgPATH, LocalDateTime joinDate, boolean status, Integer reviewId, Integer petsHelped) {
         this.memberID = memberID;
         this.username = username;
         this.password = password;
@@ -43,6 +53,9 @@ public class CommunityMember {
         this.imgPATH = imgPATH;
         this.joinDate = joinDate;
         this.status = status;
+        this.reviewId = reviewId;
+        this.petsHelped = petsHelped;
+
     }
 
     // Getters and Setters
@@ -53,20 +66,27 @@ public class CommunityMember {
     public void setMemberID(Integer memberID) {
         this.memberID = memberID;
     }
+    public Integer getMemberReviewID() {
+        return reviewId;
+    }
 
-    public String getUsername() {
+    public void setMemberReviewID(Integer reviewID) {
+        this.reviewId = reviewId;
+    }
+
+    public String getMemberUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setMemberUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getMemberPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setMemberPassword(String password) {
         this.password = password;
     }
 
@@ -94,11 +114,19 @@ public class CommunityMember {
         this.joinDate = joinDate;
     }
 
-    public boolean getStatus() {
+    public boolean getMemberByStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setMemberByStatus(boolean status) {
         this.status = status;
     }
+    public int getPetsHelped() {
+        return petsHelped;
+    }
+
+    public void setPetsHelped(int petsHelped) {
+        this.petsHelped = petsHelped;
+    }
+
 }
