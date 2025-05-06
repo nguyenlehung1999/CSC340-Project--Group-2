@@ -39,7 +39,7 @@
             <img class="w-10 h-10 rounded-full" src="${r.owner.imgPath!'/images/avatar.jpg'}" alt="User avatar">
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <a href="/owner/${r.owner.ownerID}" class="font-semibold">${r.owner.username!''}</a>
+                <a href="/owners/${r.owner.ownerID}" class="font-semibold">${r.owner.username!''}</a>
                   <a href="/admin/reviews/delete/${r.reviewID}" class="text-red-600 text-sm font-medium">remove</a>
               </div>
               <p class="text-sm text-gray-600">Rating: ${r.rating?string("0.0")}</p>

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.hibernate.annotations.Check;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +22,7 @@ public class Review {
 
     @OneToOne
     @JoinColumn(name = "foundReportID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private FoundPetReport foundReport;
 
     @ManyToOne
