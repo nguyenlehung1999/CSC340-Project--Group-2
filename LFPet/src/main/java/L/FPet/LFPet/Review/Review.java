@@ -1,7 +1,6 @@
-package L.FPet.LFPet.Review;
+package com.example.LostPetFinder;
 
-import L.FPet.LFPet.FoundPetReport.FoundPetReport;
-import L.FPet.LFPet.LostPetOwner.LostPetOwner;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -13,9 +12,12 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reviewID")
     private Integer reviewID;
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false) // this will be the foreign key
+    private CommunityMember member;
 
     @OneToOne
-    @JoinColumn(name = "found_reportid")
+    @JoinColumn(name = "foundReportID")
     private FoundPetReport foundReport;
 
     @ManyToOne
@@ -25,8 +27,11 @@ public class Review {
     @Column(name = "rating", nullable = false)
     private Integer rating;
 
-    @Column(name = "review_text", columnDefinition = "TEXT")
+    @Column(name = "reviewText", columnDefinition = "TEXT")
     private String reviewText;
+
+    @Column(name = "replyText", columnDefinition = "TEXT")
+    private String replyText;
 
     @Column(name = "timeStamp", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime timeStamp;
@@ -35,13 +40,14 @@ public class Review {
     public Review() {
     }
 
-    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Integer rating, String reviewText, LocalDateTime timeStamp) {
+    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Integer rating, String reviewText, String replyText, LocalDateTime timeStamp) {
         this.reviewID = reviewID;
         this.foundReport = foundReport;
         this.owner = owner;
         this.rating = rating;
         this.reviewText = reviewText;
         this.timeStamp = timeStamp;
+        this.replyText = replyText;
     }
 
     // Getters and Setters
@@ -85,6 +91,15 @@ public class Review {
         this.reviewText = reviewText;
     }
 
+    public String getReplyText() {
+        return replyText;
+    }
+
+    public void setReplyText(String replyText) {
+        this.replyText = replyText;
+    }
+
+
     public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
@@ -92,9 +107,11 @@ public class Review {
     public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
     }
+    public CommunityMember getMember() {
+        return member;
+    }
 
-    @PrePersist
-    protected void onCreate() {
-        this.timeStamp = LocalDateTime.now();
+    public void setMember(CommunityMember member) {
+        this.member = member;
     }
 }

@@ -1,15 +1,24 @@
-package L.FPet.LFPet.Review;
+package com.example.LostPetFinder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+
+
+
+
+
+
 
     /**
      * Fetch all Review records.
@@ -18,6 +27,22 @@ public class ReviewService {
      */
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
+    }
+
+    public Map<Integer, Long> getStarCounts() {
+        List<Object[]> results = reviewRepository.getRatingBreakdown();
+        Map<Integer, Long> starMap = new HashMap<>();
+        for (Object[] row : results) {
+            Integer rating = (Integer) row[0];
+            Long count = (Long) row[1];
+            starMap.put(rating, count);
+        }
+        return starMap;
+    }
+
+    public double getAverageRating() {
+        Double avg = reviewRepository.getAverageRating();
+        return avg != null ? avg : 0.0;
     }
 
     /**
@@ -41,9 +66,11 @@ public class ReviewService {
     /**
      * Get the average rating of all review
      */
-    public double getAverageRating() {
-        return reviewRepository.findAverageRating();
+
+    public List<Review> getReviewsByMemberId(Integer memberId) {
+        return reviewRepository.findByMember_MemberID(memberId);
     }
+
     /**
      * Add a new Review.
      *
@@ -52,6 +79,9 @@ public class ReviewService {
     public void addNewReview(Review review) {
         reviewRepository.save(review);
     }
+
+
+
 
     /**
      * Update an existing Review.
@@ -68,6 +98,7 @@ public class ReviewService {
         }
     }
 
+
     /**
      * Delete a Review by its ID.
      *
@@ -76,4 +107,23 @@ public class ReviewService {
     public void deleteReviewById(int reviewId) {
         reviewRepository.deleteById(reviewId);
     }
+
+    public Map<Integer, Long> getStarCountsByMember(Long memberId) {
+        List<Object[]> results = reviewRepository.findStarCountsByMemberId(memberId);
+        Map<Integer, Long> counts = new HashMap<>();
+        for (Object[] row : results) {
+            Integer rating = (Integer) row[0];
+            Long count = (Long) row[1];
+            counts.put(rating, count);
+        }
+        return counts;
+    }
+
+    public double getAverageRatingByMember(Long memberId) {
+        Double avg = reviewRepository.findAverageRatingByMemberId(memberId);
+        return avg != null ? avg : 0.0;
+    }
+
 }
+
+

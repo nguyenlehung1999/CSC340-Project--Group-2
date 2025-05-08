@@ -1,9 +1,9 @@
-package L.FPet.LFPet.Review;
+package com.example.LostPetFinder;
 
-import L.FPet.LFPet.FoundPetReport.FoundPetReport;
-import L.FPet.LFPet.LostPetOwner.LostPetOwner;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +15,9 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
      * Find reviews by a specific rating.
      */
     List<Review> findByRating(int rating);
+    List<Review> findByMember_MemberID(Integer memberId);
+
+
 
     /**
      * Find reviews with a rating greater than or equal to the specified value.
@@ -38,6 +41,18 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     /**
      * Return the average rating
      */
+    @Query("SELECT r.rating, COUNT(r) FROM Review r GROUP BY r.rating")
+    List<Object[]> getRatingBreakdown();
+
     @Query("SELECT AVG(r.rating) FROM Review r")
-    double findAverageRating();
+    Double getAverageRating();
+
+    // Count of each star rating for a given member
+    @Query("SELECT r.rating, COUNT(r) FROM Review r WHERE r.member.id = :memberId GROUP BY r.rating")
+    List<Object[]> findStarCountsByMemberId(@Param("memberId") Long memberId);
+
+    // Average rating for a given member
+    @Query("SELECT AVG(r.rating) FROM Review r WHERE r.member.id = :memberId")
+    Double findAverageRatingByMemberId(@Param("memberId") Long memberId);
+
 }
