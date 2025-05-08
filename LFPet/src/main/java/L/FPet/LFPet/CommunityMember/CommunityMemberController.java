@@ -215,16 +215,14 @@ import java.util.Map;
 
     }
     @PostMapping("/reply/{reviewId}")
-    public String replyToReview(@PathVariable int reviewId,
-                                @RequestParam("replyText") String replyText,
-                                HttpSession session) {
+    public String replyToReview(@PathVariable int reviewId, @RequestParam("replyText") String replyText, HttpSession session) {
         String email = (String) session.getAttribute("loggedInEmail");
         if (email == null) return "redirect:/communitymember/LoginPage";
 
         Review review = reviewService.getReviewById(reviewId);
         if (review != null) {
             review.setReplyText(replyText);
-            reviewService.addNewReview(review);  // save updated review
+            reviewService.addNewReview(review);
         }
 
         return "redirect:/communitymember/Reviews";
@@ -239,10 +237,10 @@ import java.util.Map;
         String email = (String) session.getAttribute("loggedInEmail");
         CommunityMember member = service.getEmail(email);
 
-        Map<Integer, Long> ratingCount = reviewService.getStarCounts();
+        Long memberId = Long.valueOf(member.getMemberID());
+        Map<Integer, Long> ratingCount = reviewService.getStarCountsByMember(memberId);
         long total = ratingCount.values().stream().mapToLong(Long::longValue).sum();
-        double average = reviewService.getAverageRating();
-
+        double average = total == 0 ? 0.0 : reviewService.getAverageRatingByMember(memberId);
 
         Map<String, Double> ratingPercent = new HashMap<>();
         for (int i = 1; i <= 5; i++) {
@@ -309,24 +307,29 @@ import java.util.Map;
         CommunityMember member = service.getEmail(email);
         if (member == null) return "redirect:/communitymember/LoginPage";
 
-        // Step 1: Save the new pet
+
         pet.setMember(member);
-        pet.setStatus(true); // mark as found
+        pet.setStatus(true);
         petService.addNewPet(pet);
 
-        // Step 2: Create and save the FoundPetReport
+
         FoundPetReport report = new FoundPetReport();
         report.setPet(pet);
         report.setMember(member);
         report.setCreatedAT(LocalDateTime.now());
-        report.setFoundDate(LocalDateTime.now()); // or manually entered via form later
-        report.setFoundLocation(pet.getFoundLocation()); // assume pet has this field
+        report.setFoundDate(LocalDateTime.now());
+        report.setFoundLocation(pet.getFoundLocation());
         report.setDescription(pet.getDescription());
         report.setStatus(true);
+        fReportService.addNewReport(report);
 
-        fReportService.addNewReport(report); // save the report
 
-        return "redirect:/communitymember/Dashboard"; // show reported pets
+        Integer helped = member.getPetsHelped();
+        member.setPetsHelped(helped != null ? helped + 1 : 1);
+        service.updateMember(member.getMemberID(), member);
+
+
+        return "redirect:/communitymember/Dashboard";
     }
 
 
@@ -363,7 +366,7 @@ import java.util.Map;
         public Object updateMember(@PathVariable int memberId, @ModelAttribute CommunityMember communitymember)
         {
             service.updateMember(memberId, communitymember);
-            //return new ResponseEntity<>(service.getStudentById(studentId), HttpStatus.CREATED);
+
             return "redirect:/communitymember/Dashboard";
 
 
@@ -403,5 +406,8 @@ import java.util.Map;
         }
 
     }
+
+
+
 
 
