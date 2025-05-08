@@ -1,4 +1,4 @@
-package L.FPet.LFPet.FoundPetReport;
+package com.example.LostPetFinder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

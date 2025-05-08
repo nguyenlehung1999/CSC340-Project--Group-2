@@ -1,16 +1,15 @@
-package L.FPet.LFPet.FoundPetReport;
+package com.example.LostPetFinder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * FReportController.java
  * Includes all REST API endpoint mappings for the FoundPetReport entity.
  */
-@Controller
+@RestController
 @RequestMapping("/freports")
 public class FReportController {
 
@@ -51,6 +50,13 @@ public class FReportController {
      *       "foundLocation": "Downtown Park",
      *         "status": true
      *       }
+     *
+     *       {
+     *          "member": { "memberID": 1000 },
+     *           "pet":  { "petID": 200 },
+     *             "foundLocation": "Downtown Park",
+     *               "status": true
+     *             }
      *
      * @param report the new FoundPetReport object.
      * @return the updated list of FoundPetReport objects.

@@ -1,7 +1,6 @@
-package L.FPet.LFPet.FoundPetReport;
+package com.example.LostPetFinder;
 
-import L.FPet.LFPet.CommunityMember.CommunityMember;
-import L.FPet.LFPet.Pet.Pet;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -11,7 +10,7 @@ public class FoundPetReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "found_reportid")
+    @Column(name = "foundReportID")
     private Integer foundReportID;
 
     @ManyToOne
