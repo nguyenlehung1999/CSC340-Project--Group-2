@@ -20,6 +20,9 @@ The **Lost and Found Pet Local App** is a community-driven platform designed to 
 ## 🗂 Sample Database
 You can [view the sample database here](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/L%26Fdata.sql).
 
+## 📑 Documentation
+📘 [View SRS Document](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/LFPetSRS.pdf)
+
 
 ### 👨‍💼 System Admin Capabilities
 1. **Manage User Access**  
