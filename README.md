@@ -18,6 +18,6 @@
        4. Write reviews for subscribed services - The owners will be able to give reviews to someone who helped them or found their pet, letting other owners see how helpful a community member was.
 
 
-       HOW TO RUN THE CODE: You can use the ampps database to manually create a user or you can use the sign up page and that should add a user to the database. After that, you should be able to use the rest of the use-cases.
+       HOW TO RUN THE CODE: You can use the ampps database to manually create a user or you can use the sign up page and that should add a user to the database. After that, you should be able to use the rest of the use-cases. Use the lfpet.sql to import my database.
 
        
