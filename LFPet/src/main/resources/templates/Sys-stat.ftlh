@@ -84,6 +84,36 @@
       </div>
 </div>
 </section>
+
+<section id="bar-section" class="px-4 py-2">
+  <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+  <h2 class="text-lg font-semibold mb-4">User Account Status</h2>
+
+  <div class="mb-4">
+    <p class="text-sm mb-1">Owners</p>
+    <div class="w-full bg-gray-200 rounded-full h-4 flex overflow-hidden">
+      <div class="bg-blue-500 h-4" style="width: ${(activeOwners * 100) / (activeOwners + bannedOwners)}%"></div>
+      <div class="bg-red-500 h-4" style="width: ${(bannedOwners * 100) / (activeOwners + bannedOwners)}%"></div>
+    </div>
+    <div class="flex justify-between text-xs text-gray-600 mt-1">
+      <span>Active: ${activeOwners}</span>
+      <span>Banned: ${bannedOwners}</span>
+    </div>
+  </div>
+
+  <div>
+    <p class="text-sm mb-1">Members</p>
+    <div class="w-full bg-gray-200 rounded-full h-4 flex overflow-hidden">
+      <div class="bg-green-500 h-4" style="width: ${(activeMembers * 100) / (activeMembers + bannedMembers)}%"></div>
+      <div class="bg-red-500 h-4" style="width: ${(bannedMembers * 100) / (activeMembers + bannedMembers)}%"></div>
+    </div>
+    <div class="flex justify-between text-xs text-gray-600 mt-1">
+      <span>Active: ${activeMembers}</span>
+      <span>Banned: ${bannedMembers}</span>
+    </div>
+  </div>
+  </div>
+</section>
   </main>
   <nav id="bottom-nav" class="fixed bottom-0 w-full bg-white border-t border-gray-100">
     <div class="flex justify-around items-center h-16">

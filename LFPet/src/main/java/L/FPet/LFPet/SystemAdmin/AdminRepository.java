@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends JpaRepository<SystemAdmin, Integer> {
@@ -42,4 +43,6 @@ public interface AdminRepository extends JpaRepository<SystemAdmin, Integer> {
     ORDER BY created_at
     """, nativeQuery = true)
     List<Object> allReports();
+
+    Optional<SystemAdmin> findByUsername(String username);
 }
