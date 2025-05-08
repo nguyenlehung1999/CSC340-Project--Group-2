@@ -1,4 +1,4 @@
-package L.FPet.LFPet.Pet;
+package com.example.LostPetFinder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +98,9 @@ public class PetService {
         petRepository.deleteById(petId);
     }
 
+
+    public List<Pet> getPetsByMemberId(Integer memberId) {
+        return petRepository.findByMember_MemberID(memberId);
+    }
 
 }

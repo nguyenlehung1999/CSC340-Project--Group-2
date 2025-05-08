@@ -1,4 +1,4 @@
-package L.FPet.LFPet.Pet;
+package com.example.LostPetFinder;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +21,6 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
     @Query(value = "SELECT * FROM pet p WHERE p.name LIKE %?1%", nativeQuery = true)
     List<Pet> getPetsByName(String partialName);
 
+
+    List<Pet> findByMember_MemberID(Integer memberId);
 }

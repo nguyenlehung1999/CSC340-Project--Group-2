@@ -1,7 +1,6 @@
-package L.FPet.LFPet.Pet;
+package com.example.LostPetFinder;
 
-import L.FPet.LFPet.CommunityMember.CommunityMember;
-import L.FPet.LFPet.LostPetOwner.LostPetOwner;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -31,23 +30,24 @@ public class Pet {
     @JoinColumn(name = "ownerID")
     private LostPetOwner owner;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "memberID")
     private CommunityMember member;
 
-    @Column(name = "img_path")
     private String imgPath;
 
     private boolean status;
+    private String foundLocation;
 
     public Pet() {
     }
-    public Pet(String species, String breed, String description, String imgPath, boolean status) {
+    public Pet(String species, String breed, String description, String imgPath, boolean status, String foundLocation) {
         this.species = species;
         this.breed = breed;
         this.description = description;
         this.imgPath = imgPath;
         this.status = status;
+        this.foundLocation = foundLocation;
     }
 
     public Pet(boolean status, String description, String breed, String imgPath) {
@@ -75,7 +75,7 @@ public class Pet {
         this.status = status;
     }
 
-    ////////////////////////////////////////////////////
+
     //Getters and Setters
     public String getImgPath() {
         return imgPath;
@@ -156,5 +156,14 @@ public class Pet {
     public void setSpecies(String species) {
         this.species = species;
     }
+
+    public String getFoundLocation() {
+        return foundLocation;
+    }
+
+    public void setFoundLocation(String foundLocation) {
+        this.foundLocation = foundLocation;
+    }
+
 
 }
