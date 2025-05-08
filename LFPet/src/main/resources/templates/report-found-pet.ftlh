@@ -20,7 +20,7 @@
     </nav>
 
     <main id="main-content" class="pt-14 pb-16 px-4">
-        <form method="post" action="/communitymember/report-found-pet">
+        <form method="post" action="/communitymember/FoundPet">
             <section id="pet-info" class="bg-white rounded-lg p-4 mb-6 shadow">
                 <h2 class="text-xl font-semibold mb-4">Basic Information</h2>
 
