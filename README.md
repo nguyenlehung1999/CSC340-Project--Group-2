@@ -1,73 +1,39 @@
-# CSC340 Final Project — Group 2
-## Lost and Found Pet Local App
+[# CSC340 Project – Group 2
 
----
+## 📌 Title
+**Lost and Found Pet Local App**
 
-## 🧑‍🧜‍🦭 Team Members
-- **Hung Nguyen**  
-- **Wahhab Rasheed**  
-- **Rafael Venegas**
+## 👥 Team Members
+- Hung Nguyen
+- Wahhab Rasheed
+- Rafael Venegas
 
----
+## 📄 Description
+The **Lost and Found Pet Local App** is a community-driven platform designed to help pet owners reunite with their lost pets and enable community members to report found pets. The app connects pet owners and finders through a local network to improve the chances of a successful reunion.
 
-## 📘 Project Description
-The **Lost and Found Pet Local App** is a community-driven web platform designed to help reunite lost pets with their owners. It enables users to publish, search, and respond to pet reports in real-time using the latest information such as last seen location and time. The platform strengthens collaboration between pet owners, finders, and system administrators for improved community outcomes.
+## ⚙️ Admin Panel Features (Implemented by: Hung Nguyen)
 
----
-
-## 💼 App Roles and Functionalities
-
-### 1️⃣ Lost Pet Owner (Customer)  
-Users who have lost a pet can:
-- 📝 **Create and manage a profile**  
-  Register as a pet owner and keep your contact info up to date.
+### 🔐 Admin Login Credentials
+- **Username**: `admin`
+- **Password**: `123`
   
-- 📌 **Post lost pet reports**  
-  Upload pictures, descriptions, and last known locations to help others identify your pet.
-  
-- 🔔 **Receive match notifications**  
-  Get alerts when a found pet closely matches your missing one.
-  
-- 💬 **Message community members**  
-  Communicate directly with users who report found pets to arrange returns.
-  
-- ✅ **Mark a reunion as complete**  
-  Close a report once your pet is recovered.
-  
-- ⭐ **Leave reviews**  
-  Rate and review users who helped reunite you with your pet.
+## 🗂 Sample Database
+You can [view the sample database here](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/L%26Fdata.sql).
 
----
+## 📑 Documentation
+📘 [View SRS Document](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/LFPetSRS.pdf)
 
-### 2️⃣ Community Member (Lost Pet Finder)  
-Users who find or help search for pets can:
-- 🗒️ **Create, modify, or remove a profile**  
-  Register as a finder, or switch roles between finder and owner.
 
-- 📸 **Post found pet reports**  
-  Share photos, descriptions, and locations where pets were found.
+### 👨‍💼 System Admin Capabilities
+1. **Manage User Access**  
+   - Suspend or delete user accounts that violate community guidelines (e.g., inappropriate or irrelevant posts/pictures).
 
-- 🔍 **Search lost pet reports**  
-  Browse and identify potential matches with pets you’ve found.
+2. **Moderate Services**  
+   - Hide or remove duplicate or inappropriate posts from the platform.
 
-- 📊 **View finder statistics**  
-  Track your successful reunions and receive community feedback.
+3. **Moderate Reviews**  
+   - Remove or hide reviews that are misleading or do not contribute constructive feedback.
 
-- 💬 **Reply to reviews**  
-  Respond to feedback from pet owners and maintain a positive reputation.
-
----
-
-### 3️⃣ System Administrator (SysAdmin)
-Admins manage the app’s overall integrity:
-- 🚫 **User account moderation**  
-  Suspend or delete accounts violating community guidelines (e.g., spam or inappropriate content).
-
-- 🧹 **Service moderation**  
-  Remove duplicate or irrelevant lost/found pet reports.
-
-- 🗒️ **Review moderation**  
-  Filter out misleading or harmful reviews.
-
-- 📊 **View usage statistics**  
-  Access a dashboard with metrics like successful reunions, active users, and top contributors.
+4. **View Usage Statistics**  
+   - Access dashboards showing data such as the number of successful reunions, active users, and pets found by community members.
+](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/LFPetSRS.pdf)](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/LFPetSRS.pdf)
