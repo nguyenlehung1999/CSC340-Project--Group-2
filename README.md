@@ -1,4 +1,4 @@
-# CSC340 Project – Group 2
+[[# CSC340 Project – Group 2
 
 ## 📌 Title
 **Lost and Found Pet Local App**
@@ -36,3 +36,4 @@ You can [view the sample database here](https://github.com/nguyenlehung1999/CSC3
 
 4. **View Usage Statistics**  
    - Access dashboards showing data such as the number of successful reunions, active users, and pets found by community members.
+](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/LFPetSRS.pdf)](https://github.com/nguyenlehung1999/CSC340-Project--Group-2/blob/System-admin-mvc-working/LFPetSRS.pdf)
