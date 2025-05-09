@@ -72,6 +72,15 @@ public class PetService {
     }
 
     /**
+     * Count the total number of pet records.
+     *
+     * @return the total count of pet.
+     */
+    public long countPets() {
+        return petRepository.count();
+    }
+
+    /**
      * Update an existing Pet.
      *
      * @param petId the unique Pet id.

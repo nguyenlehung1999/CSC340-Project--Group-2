@@ -3,13 +3,14 @@ package L.FPet.LFPet.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * ReviewController.java
  * Includes all REST API endpoint mappings for the Review object.
  */
-@RestController
+@Controller
 @RequestMapping("/reviews")
 public class ReviewController {
 
@@ -45,7 +46,6 @@ public class ReviewController {
      * URL: http://localhost:8080/reviews/new
      * Example request body (JSON):
      * {
-     *   {
      *   "rating": 4,
      *   "reviewText": "Great service!",
      *   "foundReport": {
@@ -55,8 +55,6 @@ public class ReviewController {
      *     "ownerID": 2
      *   }
      * }
-     * }
-     *
      * @param review the new Review object to add.
      * @return the updated list of Review objects, or the created Review object.
      */
@@ -77,7 +75,7 @@ public class ReviewController {
      *
      * @param reviewId the unique review ID.
      * @param updatedReview the updated Review details.
-     * @return the updated Review object, or null if not found.
+     * @return the updated Review object.
      */
     @PutMapping("/update/{reviewId}")
     public ResponseEntity<?> updateReview(@PathVariable int reviewId, @RequestBody Review updatedReview) {

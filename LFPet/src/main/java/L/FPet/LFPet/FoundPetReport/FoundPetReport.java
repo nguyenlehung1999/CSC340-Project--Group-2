@@ -1,8 +1,12 @@
 package L.FPet.LFPet.FoundPetReport;
 
 import L.FPet.LFPet.CommunityMember.CommunityMember;
+import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import L.FPet.LFPet.Pet.Pet;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,39 +20,51 @@ public class FoundPetReport {
 
     @ManyToOne
     @JoinColumn(name = "memberID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private CommunityMember member;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ownerID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private LostPetOwner owner;
+
+    @ManyToOne
     @JoinColumn(name = "petID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Pet pet;
 
-    @Column(name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false,name = "createdAT", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAT;
 
     @Column(name = "description", length = 200)
     private String description;
 
-    @Column(name = "foundDate")
+    @Column(insertable = false, name = "foundDate")
     private LocalDateTime foundDate;
 
-    @Column(name = "foundLocation", length = 100)
+    @Column(name = "foundLocation", length = 100, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private String foundLocation;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "BOOLEAN DEFAULT false")
     private boolean status;
+
+    @Column(name = "type")
+    private Boolean type;
 
     public FoundPetReport() {
     }
 
-    public FoundPetReport(Integer foundReportID, CommunityMember member, Pet pet, LocalDateTime createdAT, String description, LocalDateTime foundDate, String foundLocation, boolean status) {
+    public FoundPetReport(Integer foundReportID, CommunityMember member, LostPetOwner owner, Pet pet, LocalDateTime createdAT, String description, LocalDateTime foundDate, String foundLocation, boolean status, Boolean type) {
         this.foundReportID = foundReportID;
         this.member = member;
+        this.owner = owner;
         this.pet = pet;
         this.createdAT = createdAT;
         this.description = description;
         this.foundDate = foundDate;
         this.foundLocation = foundLocation;
         this.status = status;
+        this.type = type;
     }
 
     // Getters and Setters
@@ -66,6 +82,14 @@ public class FoundPetReport {
 
     public void setMember(CommunityMember member) {
         this.member = member;
+    }
+
+    public LostPetOwner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(LostPetOwner owner) {
+        this.owner = owner;
     }
 
     public Pet getPet() {
@@ -115,4 +139,8 @@ public class FoundPetReport {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public boolean getType() {return type;}
+
+    public void setType(Boolean type) {this.type = type;}
 }

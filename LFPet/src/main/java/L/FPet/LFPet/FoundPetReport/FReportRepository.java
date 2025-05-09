@@ -1,6 +1,7 @@
 package L.FPet.LFPet.FoundPetReport;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,10 @@ public interface FReportRepository extends JpaRepository<FoundPetReport, Integer
      */
     List<FoundPetReport> findByMemberMemberID(Integer memberID);
 
+    long countByOwnerOwnerID(Integer ownerID);
+
+    long countByMemberMemberID(Integer memberID);
+
+    @Query(value = "SELECT * FROM foundpetreport ORDER BY createdat DESC;", nativeQuery = true)
+    List<FoundPetReport> allReports();
 }

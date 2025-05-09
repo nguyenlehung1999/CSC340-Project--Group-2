@@ -11,10 +11,10 @@ public class SystemAdmin {
     @Column(name = "adminID")
     private Integer adminID;
 
-    @Column(name = "username", length = 50, nullable = false)
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password", length = 50, nullable = false)
+    @Column(name = "password", length = 100, nullable = false)
     private String password;
 
     @Column(name = "email", length = 100, nullable = false)
@@ -26,17 +26,21 @@ public class SystemAdmin {
     @Column(name = "status", length = 20)
     private String status;
 
+    @Column(name = "role", length = 20, nullable = false)
+    private String role = "ROLE_ADMIN";
+
     public SystemAdmin() {
     }
 
     public SystemAdmin(Integer adminID, String username, String password, String email,
-                       String imgPATH, String status) {
+                       String imgPATH, String status, String role) {
         this.adminID = adminID;
         this.username = username;
         this.password = password;
         this.email = email;
         this.imgPATH = imgPATH;
         this.status = status;
+        this.role = role;
     }
 
     // Getters and Setters
@@ -86,5 +90,13 @@ public class SystemAdmin {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

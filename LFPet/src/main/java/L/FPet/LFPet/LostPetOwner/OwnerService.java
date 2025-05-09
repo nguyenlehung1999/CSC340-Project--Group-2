@@ -25,7 +25,7 @@ public class OwnerService {
      * Fetch a specific owner by their ID.
      *
      * @param ownerId the unique ID of the owner.
-     * @return a LostPetOwner object, or null if not found.
+     * @return a LostPetOwner object.
      */
     public LostPetOwner getOwnerById(int ownerId) {
         return ownerRepository.findById(ownerId).orElse(null);
@@ -45,7 +45,7 @@ public class OwnerService {
      * Fetch an owner by their email.
      *
      * @param email the email address.
-     * @return the LostPetOwner object, or null if not found.
+     * @return the LostPetOwner object.
      */
     public LostPetOwner getOwnerByEmail(String email) {
         return ownerRepository.getLostPetOwnerByEmail(email);
@@ -81,11 +81,15 @@ public class OwnerService {
         existing.setUsername(owner.getUsername());
         existing.setPassword(owner.getPassword());
         existing.setEmail(owner.getEmail());
+        existing.setStatus(owner.getStatus());
         existing.setImgPATH(owner.getImgPATH());
 
         ownerRepository.save(existing);
     }
 
+    public void save(LostPetOwner owner) {
+        ownerRepository.save(owner);
+    }
     /**
      * Count the total number of LostPetOwner records.
      *

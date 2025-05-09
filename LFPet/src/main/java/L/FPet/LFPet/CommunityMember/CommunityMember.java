@@ -15,6 +15,9 @@ public class CommunityMember {
     @Column(name = "username", length = 50, nullable = false)
     private String username;
 
+    @Column(name = "fullname", length = 50, nullable = false)
+    private String fullname;
+
     @Column(name = "password", length = 50, nullable = false)
     private String password;
 
@@ -25,19 +28,20 @@ public class CommunityMember {
     private String imgPATH;
 
     // Using java LocalDateTime
-    @Column(name = "joinDate", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false, name = "joinDate", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime joinDate;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "BOOLEAN DEFAULT true")
     private boolean status;
 
     public CommunityMember() {
     }
 
-    public CommunityMember(Integer memberID, String username, String password, String email,
+    public CommunityMember(Integer memberID, String username, String fullname, String password, String email,
                            String imgPATH, LocalDateTime joinDate, boolean status) {
         this.memberID = memberID;
         this.username = username;
+        this.fullname = fullname;
         this.password = password;
         this.email = email;
         this.imgPATH = imgPATH;
@@ -61,6 +65,10 @@ public class CommunityMember {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getFullname() {return fullname;}
+
+    public void setFullname(String fullname) {this.fullname = fullname;}
 
     public String getPassword() {
         return password;

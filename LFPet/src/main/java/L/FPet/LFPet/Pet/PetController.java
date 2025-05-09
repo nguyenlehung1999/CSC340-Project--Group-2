@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * PetController.java.
  * Includes all REST API endpoint mappings for the Pet object.
  */
-@RestController
+@Controller
 @RequestMapping("/pets")
 public class PetController {
 

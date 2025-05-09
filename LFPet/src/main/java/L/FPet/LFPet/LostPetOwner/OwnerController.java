@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * OwnerController.java.
  * Includes all REST API endpoint mappings for the LostPetOwner object.
  */
-@RestController
+@Controller
 @RequestMapping("/owners")
 public class OwnerController {
 
@@ -39,8 +39,11 @@ public class OwnerController {
      * @return one LostPetOwner object.
      */
     @GetMapping("/{ownerId}")
-    public Object getOneOwner(@PathVariable int ownerId) {
-        return new ResponseEntity<>(service.getOwnerById(ownerId), HttpStatus.OK);
+    public Object getOneOwner(@PathVariable int ownerId, Model model) {
+        model.addAttribute("user", service.getOwnerById(ownerId));
+
+        model.addAttribute("role", "Owner");
+        return "Sys-detailedProfile";
     }
 
     /**
@@ -93,12 +96,11 @@ public class OwnerController {
      * URL: http://localhost:8080/owners/update/2
      * Example request body:
      * {
-     *   "ownerID": 2,
      *   "username": "john_doe_updated",
      *   "password": "newsecret",
      *   "email": "john_updated@example.com",
      *   "imgPATH": "newprofile.jpg",
-     *   "status": "active"
+     *   "status": true
      * }
      *
      * @param ownerId the unique Owner id.
@@ -118,9 +120,9 @@ public class OwnerController {
      * @param ownerId the unique Owner id.
      * @return the updated list of Owner objects.
      */
-    @DeleteMapping("/delete/{ownerId}")
+    @GetMapping("/delete/{ownerId}")
     public Object deleteOwnerById(@PathVariable int ownerId) {
         service.deleteOwnerById(ownerId);
-        return new ResponseEntity<>(service.getAllOwners(), HttpStatus.OK);
+        return "redirect:/admin/allusers";
     }
 }

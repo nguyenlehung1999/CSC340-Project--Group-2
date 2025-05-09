@@ -3,6 +3,12 @@ package L.FPet.LFPet.Review;
 import L.FPet.LFPet.FoundPetReport.FoundPetReport;
 import L.FPet.LFPet.LostPetOwner.LostPetOwner;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,25 +22,29 @@ public class Review {
 
     @OneToOne
     @JoinColumn(name = "foundReportID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private FoundPetReport foundReport;
 
     @ManyToOne
     @JoinColumn(name = "ownerID")
     private LostPetOwner owner;
 
+    @Min(0)
+    @Max(5)
+    @Check(constraints = "rating >= 0 AND rating <= 5")
     @Column(name = "rating", nullable = false)
-    private Integer rating;
+    private Double rating;
 
     @Column(name = "reviewText", columnDefinition = "TEXT")
     private String reviewText;
 
-    @Column(name = "timeStamp", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(insertable = false, name = "timeStamp", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime timeStamp;
 
     public Review() {
     }
 
-    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Integer rating, String reviewText, LocalDateTime timeStamp) {
+    public Review(Integer reviewID, FoundPetReport foundReport, LostPetOwner owner, Double rating, String reviewText, LocalDateTime timeStamp) {
         this.reviewID = reviewID;
         this.foundReport = foundReport;
         this.owner = owner;
@@ -52,7 +62,7 @@ public class Review {
         this.reviewID = reviewID;
     }
 
-    public FoundPetReport foundReport() {
+    public FoundPetReport getFoundReport() {
         return foundReport;
     }
 
@@ -60,7 +70,7 @@ public class Review {
         this.foundReport = foundReport;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
@@ -72,7 +82,7 @@ public class Review {
         this.owner = owner;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
